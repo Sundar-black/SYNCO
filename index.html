@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SYNCO — Premium Futuristic Website</title>
+  <meta name="description" content="SYNCO IT & SYNCO DM - The premium digital ecosystem syncing technology and creative digital growth.">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+  
+  <!-- GSAP Animation Core -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="loading tech-mode">
+
+  <!-- Cinematic Preloader -->
+  <div id="preloader">
+    <div class="loader-logo-container">
+      <svg class="loader-logo-svg" viewBox="0 0 160 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Letter S (White) -->
+        <path class="logo-s" d="M32 18 H20 C14 18 14 26 24 26 C34 26 34 34 28 34 H16" stroke="#f8fafc" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+        <!-- Letter Y (White) -->
+        <path class="logo-y" d="M42 18 L50 28 L58 18 M50 28 V40" stroke="#f8fafc" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+        <!-- Letter N (Blue Arch) -->
+        <path class="logo-n" d="M66 40 V26 C66 18 80 18 80 26 V40" stroke="#00f0ff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+        <!-- Letter C (White) -->
+        <path class="logo-c" d="M102 22 C98 18 90 18 90 29 C90 40 98 40 102 36" stroke="#f8fafc" stroke-width="4.5" stroke-linecap="round" />
+        <!-- Letter O (White / Blue arrow combination) -->
+        <path class="logo-o" d="M112 29 C112 36 118 41 125 41 C132 41 137 36 137 29 C137 22 132 17 125 17 C119 17 113 22 112 29 Z" stroke="#f8fafc" stroke-width="4.5" stroke-linecap="round" />
+        <!-- Arrow wrapping O (Blue) -->
+        <path class="logo-arrow" d="M129 18 C136 18 141 24 141 29 C141 33 138 36 142 34 L146 25 M142 34 L134 33" stroke="#0052ff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </div>
+    <div class="loader-bar-bg">
+      <div class="loader-bar-fill"></div>
+    </div>
+    <div class="loader-text">Initializing Ecosystem <span class="loader-percent">0%</span></div>
+  </div>
+
+  <!-- Interactive Warp-Grid Canvas Background -->
+  <div id="canvas-container">
+    <canvas id="canvas-bg"></canvas>
+  </div>
+
+  <!-- Ambient Glow Blobs -->
+  <div class="glow-blob" style="top: 10%; left: 15%; width: 400px; height: 400px; background-color: var(--accent-secondary);"></div>
+  <div class="glow-blob" style="top: 50%; right: 10%; width: 500px; height: 500px; background-color: var(--accent-primary);"></div>
+
+  <!-- Floating Navigation Header -->
+  <header>
+    <div class="nav-container">
+      <div class="logo">
+        <svg viewBox="0 0 160 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M32 18 H20 C14 18 14 26 24 26 C34 26 34 34 28 34 H16" stroke="#f8fafc" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M42 18 L50 28 L58 18 M50 28 V40" stroke="#f8fafc" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M66 40 V26 C66 18 80 18 80 26 V40" stroke="var(--accent-primary)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M102 22 C98 18 90 18 90 29 C90 40 98 40 102 36" stroke="#f8fafc" stroke-width="4.5" stroke-linecap="round" />
+          <path d="M112 29 C112 36 118 41 125 41 C132 41 137 36 137 29 C137 22 132 17 125 17 C119 17 113 22 112 29 Z" stroke="#f8fafc" stroke-width="4.5" stroke-linecap="round" />
+          <path d="M129 18 C136 18 141 24 141 29 C141 33 138 36 142 34 L146 25 M142 34 L134 33" stroke="var(--accent-secondary)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </div>
+      <nav class="nav-links">
+        <div class="nav-item active" data-target="home">Home</div>
+        <div class="nav-item" data-target="services">Services</div>
+        <div class="nav-item" data-target="portfolio">Portfolio</div>
+        <div class="nav-item" data-target="testimonials">Testimonials</div>
+        <div class="nav-item" data-target="contact">Contact</div>
+      </nav>
+      <div class="nav-actions">
+        <div class="terminal-trigger" id="terminal-toggle" title="Access Terminal Dashboard">
+          <i data-lucide="terminal"></i>
+        </div>
+        <div class="btn btn-secondary nav-booking-btn" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Book meeting</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="tagline-container">
+          <div class="tagline-dot"></div>
+          <span class="tagline-text">Syncing Technology & Growth</span>
+        </div>
+        <h1 class="hero-title">
+          <span>We engineer the</span>
+          <span class="accent-text" id="hero-interactive-title">Futuristic IT Ecosystem</span>
+        </h1>
+        <p class="hero-description" id="hero-description-text">
+          SYNCO IT combines bleeding-edge web development, modular mobile architecture, and high-performance UI/UX design into single premium brands.
+        </p>
+        <div class="hero-cta">
+          <button class="btn btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Get Started</button>
+          <button class="btn btn-secondary" onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})">Explore Services</button>
+        </div>
+      </div>
+      
+      <!-- Interactive Ecosystem Switcher Widget -->
+      <div class="switcher-widget-container">
+        <div class="switcher-widget glass-panel">
+          <h3 class="switcher-title">Select Division</h3>
+          <div class="switch-control switch-active-it" id="ecosystem-switch">
+            <div class="switch-bg-slider"></div>
+            <div class="switch-option active" id="opt-it">SYNCO IT</div>
+            <div class="switch-option" id="opt-dm">SYNCO DM</div>
+          </div>
+          <p class="switcher-status">
+            Currently displaying: <br><span id="status-label">IT Division Services</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="division-section">
+    <div class="section-container">
+      
+      <!-- IT Division Services (Active by Default) -->
+      <div id="services-it-panel" class="services-panel">
+        <div class="section-header">
+          <span class="section-subtitle">SYNCO IT Solutions</span>
+          <h2 class="section-title">Futuristic Web & Product Engineering</h2>
+          <p class="section-desc">We build lightning-fast products engineered for web scale, utilizing modern logic, state-of-the-art architectures, and responsive micro-interactions.</p>
+        </div>
+        <div class="cards-grid">
+          <!-- Web Dev -->
+          <div class="service-card glass-panel" data-service="Web Development">
+            <div class="card-icon"><i data-lucide="code"></i></div>
+            <h3 class="card-title">Web Development</h3>
+            <p class="card-desc">High-performance SPA/SSR applications built using Next.js and customized animation mechanics for frictionless desktop-to-mobile layouts.</p>
+            <div class="card-learn-more">
+              Learn More 
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </div>
+            <div class="card-bg-glow"></div>
+          </div>
+          <!-- App Dev -->
+          <div class="service-card glass-panel" data-service="App Development">
+            <div class="card-icon"><i data-lucide="smartphone"></i></div>
+            <h3 class="card-title">App Development</h3>
+            <p class="card-desc">Robust native and cross-platform mobile solutions featuring dynamic hardware acceleration and asynchronous offline caching integrations.</p>
+            <div class="card-learn-more">
+              Learn More 
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </div>
+            <div class="card-bg-glow"></div>
+          </div>
+          <!-- UI/UX -->
+          <div class="service-card glass-panel" data-service="UI/UX Design">
+            <div class="card-icon"><i data-lucide="layers"></i></div>
+            <h3 class="card-title">UI/UX Design</h3>
+            <p class="card-desc">Modern glassmorphic wireframes, tactile micro-animations, and responsive visual design workflows built around user ergonomics.</p>
+            <div class="card-learn-more">
+              Learn More 
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </div>
+            <div class="card-bg-glow"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DM Division Services (Hidden by Default) -->
+      <div id="services-dm-panel" class="services-panel" style="display: none;">
+        <div class="section-header">
+          <span class="section-subtitle">SYNCO DM Campaigns</span>
+          <h2 class="section-title">Growth Engineering & Brand Authority</h2>
+          <p class="section-desc">We combine advanced search optimization with programmatic marketing and high-authority video production to turn traffic into digital assets.</p>
+        </div>
+        <div class="cards-grid">
+          <!-- Video Production -->
+          <div class="service-card glass-panel" data-service="Video Production & Editing">
+            <div class="card-icon"><i data-lucide="video"></i></div>
+            <h3 class="card-title">Video Production</h3>
+            <p class="card-desc">Cinematic brand showcases, detailed product reels, and social marketing edits optimized for conversions across all distribution channels.</p>
+            <div class="card-learn-more">
+              Learn More 
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </div>
+            <div class="card-bg-glow"></div>
+          </div>
+          <!-- SEO & SMM -->
+          <div class="service-card glass-panel" data-service="Performance Marketing & Ads">
+            <div class="card-icon"><i data-lucide="trending-up"></i></div>
+            <h3 class="card-title">Performance Marketing</h3>
+            <p class="card-desc">Algorithmic search positioning, Meta/Google ads administration, and intent-focused optimization frameworks that capture qualified leads.</p>
+            <div class="card-learn-more">
+              Learn More 
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </div>
+            <div class="card-bg-glow"></div>
+          </div>
+          <!-- Personal Branding -->
+          <div class="service-card glass-panel" data-service="Personal Branding & Creative">
+            <div class="card-icon"><i data-lucide="award"></i></div>
+            <h3 class="card-title">Personal Branding</h3>
+            <p class="card-desc">Corporate and founder positioning architectures. Custom copy, graphic assets, and distribution routines to dominate industry domains.</p>
+            <div class="card-learn-more">
+              Learn More 
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </div>
+            <div class="card-bg-glow"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Portfolio Section -->
+  <section id="portfolio" class="division-section">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-subtitle">Case Studies</span>
+        <h2 class="section-title">Our Ecosystem Masterpieces</h2>
+        <p class="section-desc">Explore projects that demonstrate our standard of visual aesthetics, system architecture, and client outcomes.</p>
+      </div>
+
+      <!-- Portfolio Filters -->
+      <div class="portfolio-tabs">
+        <button class="tab-btn active" data-filter="all">All Ecosystem</button>
+        <button class="tab-btn" data-filter="it">IT Divisions</button>
+        <button class="tab-btn" data-filter="dm">Digital Marketing</button>
+      </div>
+
+      <!-- Portfolio Grid -->
+      <div class="portfolio-grid">
+        <!-- Proj 1 -->
+        <div class="portfolio-item glass-panel it" data-id="1">
+          <div class="portfolio-img-container" style="background-image: linear-gradient(135deg, #0f172a, #020617);"></div>
+          <div class="portfolio-overlay">
+            <span class="portfolio-cat">IT DIVISION · WEB DEV</span>
+            <h3 class="portfolio-title">Aether Platform</h3>
+            <p class="portfolio-brief">A multi-tenant Web3 dashboard utilizing headless API nodes and real-time canvas data mapping.</p>
+            <div class="portfolio-action">
+              Inspect Case study 
+              <i data-lucide="arrow-right"></i>
+            </div>
+          </div>
+        </div>
+        <!-- Proj 2 -->
+        <div class="portfolio-item glass-panel dm" data-id="2">
+          <div class="portfolio-img-container" style="background-image: linear-gradient(135deg, #1e1b4b, #090514);"></div>
+          <div class="portfolio-overlay">
+            <span class="portfolio-cat">DM DIVISION · ADS</span>
+            <h3 class="portfolio-title">Nova Launch Campaign</h3>
+            <p class="portfolio-brief">Engineered a multi-channel digital acquisition campaign bringing +340% inbound inquiries in 45 days.</p>
+            <div class="portfolio-action">
+              Inspect Case study 
+              <i data-lucide="arrow-right"></i>
+            </div>
+          </div>
+        </div>
+        <!-- Proj 3 -->
+        <div class="portfolio-item glass-panel it" data-id="3">
+          <div class="portfolio-img-container" style="background-image: linear-gradient(135deg, #022c22, #020617);"></div>
+          <div class="portfolio-overlay">
+            <span class="portfolio-cat">IT DIVISION · APP DEV</span>
+            <h3 class="portfolio-title">Spectra Mobile</h3>
+            <p class="portfolio-brief">Tactile hardware-accelerated asset tracking app built for iOS and Android, handling 20M requests daily.</p>
+            <div class="portfolio-action">
+              Inspect Case study 
+              <i data-lucide="arrow-right"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="testimonial-section">
+    <div class="section-container">
+      <div class="section-header" style="text-align: center; margin: 0 auto 60px auto;">
+        <span class="section-subtitle">Client Feedback</span>
+        <h2 class="section-title">Vouched By High Growth Founders</h2>
+      </div>
+
+      <div class="testimonials-carousel-wrapper">
+        <div class="testimonials-carousel">
+          <!-- Slide 1 -->
+          <div class="testimonial-slide">
+            <div class="testimonial-card glass-panel">
+              <div class="client-avatar-container">
+                <div style="background-color: var(--accent-primary); width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:#030307; font-weight:700;">AM</div>
+              </div>
+              <div class="quote-content">
+                <span class="quote-icon">“</span>
+                <p class="quote-text">SYNCO didn't just rebuild our website; they re-engineered our digital footprint. The transition system between services and the performance speed is unparalleled.</p>
+                <div class="client-info">
+                  <h4>Alexander Mercer</h4>
+                  <p>CEO, Aether Labs</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Slide 2 -->
+          <div class="testimonial-slide">
+            <div class="testimonial-card glass-panel">
+              <div class="client-avatar-container">
+                <div style="background-color: var(--accent-secondary); width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700;">SK</div>
+              </div>
+              <div class="quote-content">
+                <span class="quote-icon">“</span>
+                <p class="quote-text">The performance marketing integrations created by their DM team returned a 4.2x ROAS inside of two months. Absolute masters of their craft.</p>
+                <div class="client-info">
+                  <h4>Sarah Kincaid</h4>
+                  <p>Marketing Director, Nova Corp</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-controls">
+          <button class="control-btn" id="prev-testimonial">
+            <i data-lucide="arrow-left"></i>
+          </button>
+          <button class="control-btn" id="next-testimonial">
+            <i data-lucide="arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Client Logos ticker -->
+  <section class="clients-ticker-section">
+    <div class="ticker-wrap">
+      <div class="ticker">
+        <div class="ticker-item">AETHERLABS</div>
+        <div class="ticker-item">NOVACORP</div>
+        <div class="ticker-item">HYPERION</div>
+        <div class="ticker-item">QUANTUM.IO</div>
+        <div class="ticker-item">SPECTRA</div>
+        <div class="ticker-item">APEX.TECH</div>
+        <!-- Duplicated for loop -->
+        <div class="ticker-item">AETHERLABS</div>
+        <div class="ticker-item">NOVACORP</div>
+        <div class="ticker-item">HYPERION</div>
+        <div class="ticker-item">QUANTUM.IO</div>
+        <div class="ticker-item">SPECTRA</div>
+        <div class="ticker-item">APEX.TECH</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Scheduling Section -->
+  <section id="contact" class="contact-section">
+    <div class="section-container">
+      <div class="contact-grid">
+        <!-- Info col -->
+        <div class="contact-info-column">
+          <div>
+            <span class="section-subtitle">Get in Touch</span>
+            <h2 class="section-title" style="margin-bottom: 25px;">Let's Sync Your Ecosystem</h2>
+            <p class="section-desc" style="max-width: 480px;">Ready to integrate tech excellence and marketing growth? Book a visual consultation or send a message.</p>
+          </div>
+          <div class="contact-details">
+            <div class="detail-item">
+              <div class="detail-icon"><i data-lucide="mail"></i></div>
+              <div class="detail-content">
+                <h4>Digital Inbox</h4>
+                <p>sync@synco.digital</p>
+              </div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-icon"><i data-lucide="map-pin"></i></div>
+              <div class="detail-content">
+                <h4>HQ Terminal</h4>
+                <p>Space Cybercity, Suite 101B</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form and Scheduler col -->
+        <div class="form-column glass-panel">
+          <form class="contact-form" id="main-contact-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="frm-name">Your Name</label>
+                <input type="text" id="frm-name" required placeholder="John Doe">
+              </div>
+              <div class="form-group">
+                <label for="frm-email">Your Email</label>
+                <input type="email" id="frm-email" required placeholder="john@domain.com">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="frm-division">Target Division</label>
+              <select id="frm-division">
+                <option value="IT Solution">SYNCO IT (Web, App, UI/UX)</option>
+                <option value="DM Campaign">SYNCO DM (Ads, Video, SEO)</option>
+                <option value="Full Ecosystem">Full Integrated Ecosystem</option>
+              </select>
+            </div>
+            
+            <!-- Custom interactive calendar widget -->
+            <div class="form-group">
+              <label>Select Consultation Slot</label>
+              <div class="calendar-widget">
+                <div class="calendar-header">
+                  <div class="cal-month">August 2026</div>
+                  <div class="cal-nav">
+                    <div class="cal-arrow"><i data-lucide="chevron-left"></i></div>
+                    <div class="cal-arrow"><i data-lucide="chevron-right"></i></div>
+                  </div>
+                </div>
+                <div class="cal-grid">
+                  <span class="cal-day-label">M</span>
+                  <span class="cal-day-label">T</span>
+                  <span class="cal-day-label">W</span>
+                  <span class="cal-day-label">T</span>
+                  <span class="cal-day-label">F</span>
+                  <span class="cal-day-label">S</span>
+                  <span class="cal-day-label">S</span>
+                  
+                  <!-- Muted prev days -->
+                  <span class="cal-day muted">27</span>
+                  <span class="cal-day muted">28</span>
+                  <span class="cal-day muted">29</span>
+                  <span class="cal-day muted">30</span>
+                  <span class="cal-day muted">31</span>
+                  <!-- Active days -->
+                  <span class="cal-day active" data-day="1">1</span>
+                  <span class="cal-day" data-day="2">2</span>
+                  <span class="cal-day" data-day="3">3</span>
+                  <span class="cal-day" data-day="4">4</span>
+                  <span class="cal-day" data-day="5">5</span>
+                  <span class="cal-day" data-day="6">6</span>
+                  <span class="cal-day" data-day="7">7</span>
+                  <span class="cal-day" data-day="8">8</span>
+                </div>
+                <div class="time-slots">
+                  <div class="time-slot active" data-time="10:00 AM">10:00 AM</div>
+                  <div class="time-slot" data-time="02:00 PM">02:00 PM</div>
+                  <div class="time-slot" data-time="04:30 PM">04:30 PM</div>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Initialize Integration Sync</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo" style="width: 110px;">
+            <svg viewBox="0 0 160 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M32 18 H20 C14 18 14 26 24 26 C34 26 34 34 28 34 H16" stroke="#f8fafc" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M42 18 L50 28 L58 18 M50 28 V40" stroke="#f8fafc" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M66 40 V26 C66 18 80 18 80 26 V40" stroke="var(--accent-primary)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M102 22 C98 18 90 18 90 29 C90 40 98 40 102 36" stroke="#f8fafc" stroke-width="4.5" stroke-linecap="round" />
+              <path d="M112 29 C112 36 118 41 125 41 C132 41 137 36 137 29 C137 22 132 17 125 17 C119 17 113 22 112 29 Z" stroke="#f8fafc" stroke-width="4.5" stroke-linecap="round" />
+              <path d="M129 18 C136 18 141 24 141 29 C141 33 138 36 142 34 L146 25 M142 34 L134 33" stroke="var(--accent-secondary)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </div>
+          <p>Next-generation digital agency combining IT infrastructure engineering and high-performance digital marketing growth.</p>
+        </div>
+        <div class="footer-col">
+          <h4>IT Solutions</h4>
+          <div class="footer-links">
+            <span class="footer-link">Next.js Web Dev</span>
+            <span class="footer-link">Mobile Systems</span>
+            <span class="footer-link">UI/UX Prototypes</span>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Growth DM</h4>
+          <div class="footer-links">
+            <span class="footer-link">Video Commercials</span>
+            <span class="footer-link">SEO Campaigning</span>
+            <span class="footer-link">Performance Ads</span>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Admin Access</h4>
+          <div class="footer-links">
+            <span class="footer-link" onclick="document.getElementById('terminal-toggle').click()">Open Dashboard HUD</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 SYNCO Ecosystem. Syncing Technology & Growth. All Rights Reserved.</p>
+        <div class="footer-socials">
+          <a class="social-icon" href="#"><i data-lucide="twitter"></i></a>
+          <a class="social-icon" href="#"><i data-lucide="linkedin"></i></a>
+          <a class="social-icon" href="#"><i data-lucide="github"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Fullscreen Portfolio Case Study Modal -->
+  <div class="modal-overlay" id="portfolio-modal">
+    <div class="modal-content glass-panel">
+      <div class="modal-close" id="modal-close-btn">
+        <i data-lucide="x"></i>
+      </div>
+      <div class="modal-layout">
+        <!-- Media col -->
+        <div class="modal-media-showcase">
+          <div class="modal-video-placeholder" id="modal-project-img" style="background-image: url('');">
+            <div class="play-reel-btn">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+        </div>
+        <!-- Info col -->
+        <div class="modal-info-panel">
+          <span class="portfolio-cat" id="modal-project-cat">IT DIVISION</span>
+          <h2 id="modal-project-title">Project Title</h2>
+          <div class="modal-meta-grid">
+            <div class="meta-item">
+              <span class="meta-label">Client</span>
+              <span class="meta-val" id="modal-project-client">Global Client</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Category</span>
+              <span class="meta-val" id="modal-project-spec">Engineering</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Date</span>
+              <span class="meta-val" id="modal-project-date">Q2 2026</span>
+            </div>
+          </div>
+          <p class="modal-body-text" id="modal-project-desc">
+            Project description content loaded dynamically...
+          </p>
+          <div class="stat-glow-box">
+            <div class="stat-item">
+              <div class="stat-num" id="modal-project-stat-1">+340%</div>
+              <div class="stat-lbl" id="modal-project-stat-lbl-1">Conversion Increment</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num" id="modal-project-stat-2">&lt; 80ms</div>
+              <div class="stat-lbl" id="modal-project-stat-lbl-2">Server Latency</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Simulator: Admin Dashboard Overlay -->
+  <div id="admin-dashboard">
+    <div class="dashboard-container glass-panel">
+      <!-- Sidebar HUD -->
+      <aside class="dash-sidebar">
+        <div>
+          <div class="dash-logo">
+            <i data-lucide="cpu"></i>
+            <span>SYNCO HUD v1.0</span>
+          </div>
+          <nav class="dash-nav">
+            <div class="dash-nav-item active" data-tab="overview"><i data-lucide="layout-dashboard"></i> Overview</div>
+            <div class="dash-nav-item" data-tab="leads"><i data-lucide="users"></i> Lead Inbox</div>
+            <div class="dash-nav-item" data-tab="settings"><i data-lucide="sliders"></i> Node Config</div>
+          </nav>
+        </div>
+        <div class="dash-footer">
+          <p>Node Status: <span style="color:#10b981; font-weight:600;">ACTIVE</span></p>
+          <p style="margin-top: 5px;">Secure Terminal Link</p>
+        </div>
+      </aside>
+      
+      <!-- Main Content -->
+      <main class="dash-main">
+        <header class="dash-header">
+          <div class="dash-header-title">
+            <h2 id="dash-section-title">Ecosystem Health Overview</h2>
+            <p id="dash-section-desc">Real-time statistics of SYNCO digital components.</p>
+          </div>
+          <div class="dash-close" id="dash-close-btn"><i data-lucide="x"></i></div>
+        </header>
+        
+        <div class="dash-body">
+          <!-- Overview Tab -->
+          <div class="dash-content-section active" id="sec-overview">
+            <div class="dash-stats-row">
+              <div class="dash-stat-card">
+                <div class="dash-stat-header">
+                  <span class="dash-stat-title">Network Visits</span>
+                  <i class="dash-stat-icon" data-lucide="eye"></i>
+                </div>
+                <div class="dash-stat-value">124,802</div>
+                <div class="dash-stat-trend"><i data-lucide="arrow-up-right"></i> +14.2% today</div>
+              </div>
+              <div class="dash-stat-card">
+                <div class="dash-stat-header">
+                  <span class="dash-stat-title">Inquiries Synced</span>
+                  <i class="dash-stat-icon" data-lucide="message-square"></i>
+                </div>
+                <div class="dash-stat-value" id="dash-total-leads">42</div>
+                <div class="dash-stat-trend"><i data-lucide="arrow-up-right"></i> +4 new</div>
+              </div>
+              <div class="dash-stat-card">
+                <div class="dash-stat-header">
+                  <span class="dash-stat-title">Conversion Rate</span>
+                  <i class="dash-stat-icon" data-lucide="percent"></i>
+                </div>
+                <div class="dash-stat-value">3.84%</div>
+                <div class="dash-stat-trend"><i data-lucide="arrow-up-right"></i> +0.6% this week</div>
+              </div>
+              <div class="dash-stat-card">
+                <div class="dash-stat-header">
+                  <span class="dash-stat-title">Warp Grid Nodes</span>
+                  <i class="dash-stat-icon" data-lucide="activity"></i>
+                </div>
+                <div class="dash-stat-value" id="dash-particles-count">80</div>
+                <div class="dash-stat-trend">Canvas rendering optimal</div>
+              </div>
+            </div>
+
+            <div class="glass-panel" style="padding: 30px;">
+              <h3 style="font-family: var(--font-heading); margin-bottom: 20px;">System Terminal Logs</h3>
+              <div style="background: rgba(0,0,0,0.4); border-radius: 8px; font-family: monospace; font-size: 0.85rem; padding: 20px; color:#10b981; line-height:1.6; height: 180px; overflow-y: auto;">
+                <p>&gt; [SYSTEM] Initializing SYNCO Web Core...</p>
+                <p>&gt; [WARP-CANVAS] Canvas size bound to viewport: 1920x1080</p>
+                <p>&gt; [THEME] Swapped active core to division: SYNCO IT (Electric Mode)</p>
+                <p>&gt; [PORTFOLIO] Loaded 3 active case studies</p>
+                <p>&gt; [CONTACT] Scheduler grid initialized for slot validation</p>
+                <p id="dash-log-entry">&gt; [SYSTEM] Secure socket channel 2026.A established. Standing by.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Leads Tab -->
+          <div class="dash-content-section" id="sec-leads">
+            <div class="leads-table-container">
+              <table class="leads-table">
+                <thead>
+                  <tr>
+                    <th>Lead Name</th>
+                    <th>Email Address</th>
+                    <th>Selected Division</th>
+                    <th>Sync Time</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="dash-leads-list">
+                  <!-- Leads populating dynamically -->
+                  <tr>
+                    <td>Marcus Vance</td>
+                    <td>m.vance@aether.labs</td>
+                    <td>Full Ecosystem</td>
+                    <td>10 mins ago</td>
+                    <td><span class="lead-status status-new">NEW</span></td>
+                  </tr>
+                  <tr>
+                    <td>Helen Carter</td>
+                    <td>helen@novacorp.io</td>
+                    <td>DM Campaign</td>
+                    <td>2 hours ago</td>
+                    <td><span class="lead-status status-new">NEW</span></td>
+                  </tr>
+                  <tr>
+                    <td>Dmitri Rostov</td>
+                    <td>dmitri@quantum.tech</td>
+                    <td>IT Solution</td>
+                    <td>1 day ago</td>
+                    <td><span class="lead-status status-contacted">CONTACTED</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Settings Tab -->
+          <div class="dash-content-section" id="sec-settings">
+            <div class="glass-panel" style="padding: 35px; max-width: 600px;">
+              <h3 style="font-family: var(--font-heading); margin-bottom: 25px;">Interactive Config Node</h3>
+              
+              <div class="form-group" style="margin-bottom: 25px;">
+                <label for="cfg-particles">Warp Grid Node Count</label>
+                <input type="range" id="cfg-particles" min="20" max="150" value="80" style="margin-top: 10px;">
+                <span style="font-size: 0.8rem; color: var(--text-muted); margin-top: 5px; display: block;" id="particle-val-lbl">Current Nodes: 80</span>
+              </div>
+              
+              <div class="form-group">
+                <label for="cfg-speed">Canvas Animation Velocity</label>
+                <select id="cfg-speed" style="margin-top: 10px;">
+                  <option value="0.5">Muted (0.5x)</option>
+                  <option value="1" selected>Default (1.0x)</option>
+                  <option value="2">Aggressive (2.0x)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- JavaScript Logics -->
+  <script src="./assets/js/canvasBg.js"></script>
+  <script src="./assets/js/loader.js"></script>
+  <script src="./assets/js/dashboard.js"></script>
+  <script src="./assets/js/app.js"></script>
+</body>
+</html>
