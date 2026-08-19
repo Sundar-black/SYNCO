@@ -298,7 +298,7 @@
 
         <div class="feedback-logs-grid">
           <!-- Log Item 1 -->
-          <div class="feedback-log-card">
+          <div class="feedback-log-card" data-id="1">
             <div class="log-card-header">
               <span class="log-prompt">&gt; [FEEDBACK_LOG_01]</span>
               <span class="log-tag">SYNCO IT · WEB DEV</span>
@@ -312,12 +312,15 @@
                   <p>CEO, Aether Labs</p>
                 </div>
               </div>
-              <div class="log-metric-badge">+280% Engagement</div>
+            </div>
+            <div class="log-learn-more">
+              <span>Read Audit Verification Log</span>
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
             </div>
           </div>
 
           <!-- Log Item 2 -->
-          <div class="feedback-log-card">
+          <div class="feedback-log-card" data-id="2">
             <div class="log-card-header">
               <span class="log-prompt">&gt; [FEEDBACK_LOG_02]</span>
               <span class="log-tag" style="color: #bd00ff; border-color: rgba(189, 0, 255, 0.3);">SYNCO DM · ADS</span>
@@ -331,12 +334,15 @@
                   <p>Marketing Director, Nova Corp</p>
                 </div>
               </div>
-              <div class="log-metric-badge" style="color: #bd00ff; border-color: rgba(189, 0, 255, 0.3); background: rgba(189, 0, 255, 0.08);">4.2x ROAS Scaling</div>
+            </div>
+            <div class="log-learn-more">
+              <span>Read Audit Verification Log</span>
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
             </div>
           </div>
 
           <!-- Log Item 3 -->
-          <div class="feedback-log-card">
+          <div class="feedback-log-card" data-id="3">
             <div class="log-card-header">
               <span class="log-prompt">&gt; [FEEDBACK_LOG_03]</span>
               <span class="log-tag">SYNCO IT · MOBILE APP</span>
@@ -350,12 +356,15 @@
                   <p>CTO, Spectra Logistics</p>
                 </div>
               </div>
-              <div class="log-metric-badge">100% Uptime Score</div>
+            </div>
+            <div class="log-learn-more">
+              <span>Read Audit Verification Log</span>
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
             </div>
           </div>
 
           <!-- Log Item 4 -->
-          <div class="feedback-log-card">
+          <div class="feedback-log-card" data-id="4">
             <div class="log-card-header">
               <span class="log-prompt">&gt; [FEEDBACK_LOG_04]</span>
               <span class="log-tag">SYNCO IT · CLOUD ARCH</span>
@@ -369,7 +378,10 @@
                   <p>Product Lead, Quantum AI</p>
                 </div>
               </div>
-              <div class="log-metric-badge">&lt;80ms Server Latency</div>
+            </div>
+            <div class="log-learn-more">
+              <span>Read Audit Verification Log</span>
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
             </div>
           </div>
         </div>
@@ -636,6 +648,106 @@
               <div class="stat-lbl" id="modal-project-stat-lbl-2">Server Latency</div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Service Detail Learn More Modal -->
+  <div class="modal-overlay" id="service-modal">
+    <div class="modal-content glass-panel service-modal-content">
+      <div class="modal-close" id="service-modal-close">
+        <i data-lucide="x"></i>
+      </div>
+      
+      <div class="service-modal-header">
+        <span class="service-modal-badge" id="svc-modal-badge">SYNCO IT DIVISION</span>
+        <h2 class="service-modal-title" id="svc-modal-title">Web Development & Cloud Architecture</h2>
+        <p class="service-modal-tagline" id="svc-modal-tagline">High-Performance SPA/SSR Web Platforms Built for Scale</p>
+      </div>
+
+      <div class="service-modal-body">
+        <!-- Overview -->
+        <div class="svc-modal-section">
+          <h3><i data-lucide="info"></i> Service Overview</h3>
+          <p id="svc-modal-overview" class="svc-modal-text">
+            Detailed service breakdown...
+          </p>
+        </div>
+
+        <!-- Core Pillars Grid -->
+        <div class="svc-modal-section">
+          <h3><i data-lucide="cpu"></i> Core Pillars & Technical Capabilities</h3>
+          <div class="svc-pillars-grid" id="svc-modal-pillars">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Tech Stack & Workflow -->
+        <div class="svc-modal-split-row">
+          <div class="svc-modal-col">
+            <h3><i data-lucide="layers"></i> Technology Stack</h3>
+            <div class="svc-tech-tags" id="svc-modal-tech">
+              <!-- Badges -->
+            </div>
+          </div>
+          <div class="svc-modal-col">
+            <h3><i data-lucide="git-commit"></i> Delivery Roadmap</h3>
+            <ul class="svc-workflow-list" id="svc-modal-workflow">
+              <!-- List -->
+            </ul>
+          </div>
+        </div>
+
+        <!-- Quantifiable Impact -->
+        <div class="svc-modal-section">
+          <h3><i data-lucide="zap"></i> Quantifiable Benchmarks</h3>
+          <div class="svc-metrics-grid" id="svc-modal-metrics">
+            <!-- Metrics -->
+          </div>
+        </div>
+
+        <!-- CTA Action -->
+        <div class="svc-modal-footer">
+          <button class="btn btn-primary svc-book-btn" id="svc-modal-cta">
+            Book Consultation for this Service
+            <i data-lucide="arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Testimonial Verification Audit Modal -->
+  <div class="modal-overlay" id="testimonial-modal">
+    <div class="modal-content glass-panel testimonial-modal-content">
+      <div class="modal-close" id="testimonial-modal-close">
+        <i data-lucide="x"></i>
+      </div>
+      
+      <div class="testimonial-modal-header">
+        <span class="log-prompt" id="tst-modal-prompt">&gt; [FEEDBACK_LOG_01]</span>
+        <span class="log-tag" id="tst-modal-tag">SYNCO IT · WEB DEV</span>
+      </div>
+
+      <div class="testimonial-modal-body">
+        <blockquote class="testimonial-modal-quote" id="tst-modal-quote">
+          "SYNCO didn't just rebuild our website..."
+        </blockquote>
+
+        <div class="testimonial-author-box">
+          <div class="log-avatar" id="tst-modal-avatar" style="border-color: var(--accent-primary); color: var(--accent-primary);">AM</div>
+          <div>
+            <h4 id="tst-modal-author">Alexander Mercer</h4>
+            <p id="tst-modal-role">CEO, Aether Labs</p>
+          </div>
+        </div>
+
+        <div class="testimonial-deep-details">
+          <h3><i data-lucide="shield-check"></i> System Impact & Verification Audit</h3>
+          <p id="tst-modal-details">
+            Full audit details...
+          </p>
         </div>
       </div>
     </div>

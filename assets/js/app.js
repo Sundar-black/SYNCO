@@ -1,3 +1,204 @@
+// Service mock data for Learn More modal
+const serviceData = {
+  "Web Development": {
+    badge: "SYNCO IT DIVISION",
+    title: "Web Development & Cloud Architecture",
+    tagline: "High-Performance SPA/SSR Web Platforms Built for Scale",
+    overview: "We build ultra-fast, resilient web applications that convert visitors into active ecosystem users. Leveraging Next.js 14 server components, TypeScript type safety, and customized HTML5 Canvas/WebGL shader pipelines, our web solutions eliminate loading latency while delivering a visual experience that dominates competition.",
+    pillars: [
+      { title: "Next.js & SSR Architecture", desc: "Sub-100ms LCP server rendering with hybrid static generation and edge cache routing." },
+      { title: "Custom WebGL & GSAP Engine", desc: "Silky 60fps micro-animations and hardware-accelerated dynamic canvas backgrounds." },
+      { title: "Headless CMS & API Integration", desc: "Seamless GraphQL/REST microservice integration with real-time data sync." },
+      { title: "Automated Technical SEO", desc: "Deep schema markup, automated open-graph generators, and lighthouse 100 benchmark optimization." }
+    ],
+    tech: ["Next.js 14", "TypeScript", "React", "Node.js", "GSAP", "Tailwind CSS", "GraphQL", "Vercel Edge"],
+    workflow: [
+      "1. Discovery & Performance Audit",
+      "2. System Architecture & UI Prototype",
+      "3. Microservice & Frontend Engineering",
+      "4. Automated QA & Edge Deployment"
+    ],
+    metrics: [
+      { num: "< 80ms", lbl: "Global Edge Latency" },
+      { num: "99.99%", lbl: "Uptime SLA" },
+      { num: "100/100", lbl: "Lighthouse Score" }
+    ],
+    targetOption: "IT Solution"
+  },
+  "App Development": {
+    badge: "SYNCO IT DIVISION",
+    title: "Native & Cross-Platform Mobile Engineering",
+    tagline: "Hardware-Accelerated Mobile Applications for iOS & Android",
+    overview: "Our mobile division engineers tactile mobile experiences that handle millions of daily interactions seamlessly. By combining React Native with native Swift/Kotlin bridges, we achieve near-instant UI responsiveness, robust offline background synchronization, and biometric-grade client data security.",
+    pillars: [
+      { title: "React Native & Swift Bridge", desc: "Native execution speed with maximum code reusability across iOS & Android." },
+      { title: "Offline-First Data Sync", desc: "Asynchronous SQLite local queue synchronization under intermittent network connectivity." },
+      { title: "Hardware Acceleration", desc: "Direct GPU rendering for high-density charts, camera pipelines, and dynamic maps." },
+      { title: "Biometric Security", desc: "Hardware keychain encryption, biometric auth, and secure token rotation." }
+    ],
+    tech: ["React Native", "Swift / Kotlin", "TypeScript", "Redux Toolkit", "WatermelonDB", "Firebase", "WebSockets"],
+    workflow: [
+      "1. Ergonomic Mobile Blueprint",
+      "2. Core Architecture & Offline State",
+      "3. Native Bridge Integration",
+      "4. App Store & Play Store Distribution"
+    ],
+    metrics: [
+      { num: "60 FPS", lbl: "Render Frame Rate" },
+      { num: "20M+", lbl: "Daily API Requests" },
+      { num: "100%", lbl: "Sync Reliability" }
+    ],
+    targetOption: "IT Solution"
+  },
+  "UI/UX Design": {
+    badge: "SYNCO IT DIVISION",
+    title: "Futuristic Glassmorphic UI/UX Engineering",
+    tagline: "Ergonomic Visual Interfaces & Tactile Micro-Interactions",
+    overview: "We elevate user perception by engineering sleek, glassmorphic design systems customized to human cognition. From interactive Figma component systems to production-ready design tokens, we craft interface layouts that delight users and eliminate conversion friction.",
+    pillars: [
+      { title: "Figma Design Systems", desc: "Modular, fully-documented component libraries with auto-layout variables." },
+      { title: "Tactile Glassmorphism", desc: "Curated dark-mode color tokens, multi-layered depth elevation, and neon glow accents." },
+      { title: "Micro-Interactions", desc: "Purposeful state feedback, hover effects, and spring physics transitions." },
+      { title: "Usability Heatmap Testing", desc: "Data-backed click tracking and user flow optimization to maximize retention." }
+    ],
+    tech: ["Figma", "Design Tokens", "CSS3 / SVG", "ProtoPie", "Framer", "Lottie Animations", "Storybook"],
+    workflow: [
+      "1. User Persona & UX Wireframing",
+      "2. Visual Design System Creation",
+      "3. Interactive Prototype Testing",
+      "4. Frontend Developer Handoff Tokens"
+    ],
+    metrics: [
+      { num: "+310%", lbl: "User Retention" },
+      { num: "-45%", lbl: "Bounce Rate Cut" },
+      { num: "100%", lbl: "Design Token Fidelity" }
+    ],
+    targetOption: "IT Solution"
+  },
+  "Video Production & Editing": {
+    badge: "SYNCO DM DIVISION",
+    title: "Cinematic Commercial Video & Reel Engineering",
+    tagline: "High-Authority Visual Storytelling & Conversion Showcases",
+    overview: "SYNCO DM produces cinematic brand reels, product walk-throughs, and social ad variations engineered to capture instant user attention. We blend 4K footage with futuristic motion graphics, sound design, and psychological pacing built specifically for digital conversion funnels.",
+    pillars: [
+      { title: "4K Cinematic Production", desc: "High-production-value video shoots, drone choreography, and studio lighting setups." },
+      { title: "Motion Graphics & FX", desc: "3D product rendering, cyber-styled HUD overlays, and kinetic typography." },
+      { title: "Multi-Platform Ratios", desc: "Tailored aspect-ratio cuts for YouTube 16:9, Instagram 9:16 reels, and Meta feed ads." },
+      { title: "Psychological Hook Pacing", desc: "Pattern-interrupt first 3 seconds designed to maximize view-through retention." }
+    ],
+    tech: ["Premiere Pro", "After Effects", "DaVinci Resolve", "Blender 3D", "Audition", "Cinema 4D"],
+    workflow: [
+      "1. Scripting & Storyboard Concept",
+      "2. Production Shoot & Footage Capture",
+      "3. Color Grading & VFX Overlay",
+      "4. Multi-Channel Export & Ad Placement"
+    ],
+    metrics: [
+      { num: "85%", lbl: "3-Sec Hook Retention" },
+      { num: "4.5x", lbl: "View-Through Index" },
+      { num: "4K HDR", lbl: "Master Output Quality" }
+    ],
+    targetOption: "DM Campaign"
+  },
+  "Performance Marketing & Ads": {
+    badge: "SYNCO DM DIVISION",
+    title: "Algorithmic Growth & Paid Acquisition Campaigns",
+    tagline: "Precision Meta/Google Ad Campaigns Engineered for High ROAS",
+    overview: "We turn ad spend into high-margin revenue through algorithmic audience targeting, automated bidding strategies, and high-intent landing page integrations. Our growth team continuously runs A/B split tests on copy, creatives, and conversion hooks to lower client CPA while rapidly scaling campaign volume.",
+    pillars: [
+      { title: "Multi-Channel Ad Scaling", desc: "Integrated Google Search, Meta Video Ads, LinkedIn B2B targeting, and YouTube In-Stream." },
+      { title: "Real-Time Attribution Tracking", desc: "Server-side Conversions API (CAPI) and Google Tag Manager first-party tracking." },
+      { title: "Creative A/B Testing Matrix", desc: "Dynamic asset matrix testing 20+ creative combinations weekly for optimal CPA." },
+      { title: "Retargeting Funnel Sequences", desc: "Multi-touch nurturing sequences converting cold traffic into verified client bookings." }
+    ],
+    tech: ["Meta Ads Manager", "Google Ads / GA4", "Meta CAPI", "Google Tag Manager", "HubSpot CRM", "Hotjar"],
+    workflow: [
+      "1. Audience Audit & Funnel Setup",
+      "2. Creative & Copy Asset Engine",
+      "3. Algorithmic Launch & Bid Tuning",
+      "4. Scaling & Weekly ROAS Optimization"
+    ],
+    metrics: [
+      { num: "4.2x", lbl: "Average Client ROAS" },
+      { num: "-38%", lbl: "Cost Per Lead (CPA)" },
+      { num: "+340%", lbl: "Inbound Inquiry Rate" }
+    ],
+    targetOption: "DM Campaign"
+  },
+  "Personal Branding & Creative": {
+    badge: "SYNCO DM DIVISION",
+    title: "Executive Personal Branding & Content Engine",
+    tagline: "Founder Authority Engineering & Omnichannel Industry Dominance",
+    overview: "We position founders, executives, and innovators as dominant authorities in their domain. SYNCO DM creates tailored thought-leadership content, executive media assets, graphic templates, and structured social distribution schedules that generate immense inbound trust and deal flow.",
+    pillars: [
+      { title: "Founder Authority Strategy", desc: "Defining core narrative pillars, visual aesthetics, and industry positioning." },
+      { title: "Ghostwriting & Content Engine", desc: "High-impact LinkedIn posts, X threads, and long-form newsletters crafted weekly." },
+      { title: "Custom Visual Tokens", desc: "Cyber-inspired carousel graphics, banner suites, and signature media templates." },
+      { title: "Media & PR Distribution", desc: "Podcast guesting placements, feature article releases, and industry speaking positioning." }
+    ],
+    tech: ["LinkedIn Creator Studio", "Canva Pro", "Typefully", "Notion Content Hub", "Figma", "Descript"],
+    workflow: [
+      "1. Founder Persona Strategy Session",
+      "2. Visual Asset & Template Suite Design",
+      "3. Weekly Content Production Engine",
+      "4. Audience Engagement & Lead Routing"
+    ],
+    metrics: [
+      { num: "1M+", lbl: "Monthly Impressions" },
+      { num: "5.8x", lbl: "Follower Growth Velocity" },
+      { num: "High", lbl: "Inbound Deal Flow" }
+    ],
+    targetOption: "DM Campaign"
+  }
+};
+
+const testimonialData = {
+  "1": {
+    prompt: "> [FEEDBACK_LOG_01]",
+    tag: "SYNCO IT · WEB DEV",
+    quote: "\"SYNCO didn't just rebuild our website; they re-engineered our digital footprint. The transition system between services and the performance speed is unparalleled.\"",
+    author: "Alexander Mercer",
+    role: "CEO, Aether Labs",
+    avatar: "AM",
+    color: "var(--accent-primary)",
+    metric: "+280% Engagement Boost",
+    details: "Aether Labs required a next-generation Web3 platform capable of rendering real-time network node analytics on interactive HTML5 canvases. SYNCO IT engineered a custom Next.js 14 solution integrated with GraphQL microservices, bringing server response latency down to <80ms and boosting platform engagement by +280% within 30 days of launch."
+  },
+  "2": {
+    prompt: "> [FEEDBACK_LOG_02]",
+    tag: "SYNCO DM · ADS",
+    quote: "\"The performance marketing integrations created by their DM team returned a 4.2x ROAS inside of two months. Absolute masters of their craft.\"",
+    author: "Sarah Kincaid",
+    role: "Marketing Director, Nova Corp",
+    avatar: "SK",
+    color: "#bd00ff",
+    metric: "4.2x ROAS Scaling Multiple",
+    details: "Nova Corp was struggling with rising acquisition costs across standard ad channels. SYNCO DM constructed a multi-channel Meta & Google acquisition funnel paired with server-side Conversions API tracking. Within 45 days, client cost per acquisition dropped by 38% while ROAS sustained a 4.2x multiple across $150k+ in ad spend."
+  },
+  "3": {
+    prompt: "> [FEEDBACK_LOG_03]",
+    tag: "SYNCO IT · MOBILE APP",
+    quote: "\"Architected a native mobile system supporting offline queue sync and localized push syncs sustaining 100% uptime under extreme grid spikes.\"",
+    author: "Marcus Vance",
+    role: "CTO, Spectra Logistics",
+    avatar: "MV",
+    color: "var(--accent-primary)",
+    metric: "100% System Uptime Score",
+    details: "Spectra Logistics needed a robust fleet and package tracking application for 5,000+ mobile field agents operating in areas with unstable cellular service. SYNCO IT engineered an offline-first React Native architecture backed by SQLite queue caching. The application processes over 20M daily sync requests with 0% data drop."
+  },
+  "4": {
+    prompt: "> [FEEDBACK_LOG_04]",
+    tag: "SYNCO IT · CLOUD ARCH",
+    quote: "\"The high-throughput node configuration and dynamic canvas rendering cut server latency down to <80ms for over 20M+ daily sync requests.\"",
+    author: "Elena Rostova",
+    role: "Product Lead, Quantum AI",
+    avatar: "ER",
+    color: "var(--accent-primary)",
+    metric: "<80ms Edge Server Latency",
+    details: "Quantum AI required an ultra-responsive UI capable of handling real-time data streaming from neural network models. SYNCO IT optimized the frontend rendering loop using WebGL shaders and edge-cached serverless API routes, ensuring silky 60fps canvas animations and instant user responsiveness."
+  }
+};
+
 // Project mock data for case studies
 const projectData = {
   "1": {
@@ -34,7 +235,7 @@ const projectData = {
     stat1: "20M",
     lbl1: "Daily Sync Requests",
     stat2: "100%",
-    lbl2: "Uptime Score"
+    lbl1: "Uptime Score"
   }
 };
 
@@ -257,6 +458,162 @@ document.addEventListener('DOMContentLoaded', () => {
   modal.addEventListener('click', (e) => {
     if (e.target === modal) modalClose.click();
   });
+
+  // ==========================================
+  // Interactive Service Learn More Modal Engine
+  // ==========================================
+  const serviceModal = document.getElementById('service-modal');
+  const serviceModalClose = document.getElementById('service-modal-close');
+  const serviceCards = document.querySelectorAll('.service-card');
+  const serviceCtaBtn = document.getElementById('svc-modal-cta');
+
+  serviceCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const svcName = card.getAttribute('data-service');
+      const data = serviceData[svcName];
+
+      if (!data) return;
+
+      // Populate Header
+      document.getElementById('svc-modal-badge').textContent = data.badge;
+      document.getElementById('svc-modal-title').textContent = data.title;
+      document.getElementById('svc-modal-tagline').textContent = data.tagline;
+
+      // Overview
+      document.getElementById('svc-modal-overview').textContent = data.overview;
+
+      // Pillars
+      const pillarsGrid = document.getElementById('svc-modal-pillars');
+      pillarsGrid.innerHTML = data.pillars.map(p => `
+        <div class="svc-pillar-card">
+          <h4>${p.title}</h4>
+          <p>${p.desc}</p>
+        </div>
+      `).join('');
+
+      // Tech Stack
+      const techTags = document.getElementById('svc-modal-tech');
+      techTags.innerHTML = data.tech.map(t => `<span class="tech-tag">${t}</span>`).join('');
+
+      // Workflow
+      const workflowList = document.getElementById('svc-modal-workflow');
+      workflowList.innerHTML = data.workflow.map(w => `<li class="svc-workflow-item">${w}</li>`).join('');
+
+      // Metrics
+      const metricsGrid = document.getElementById('svc-modal-metrics');
+      metricsGrid.innerHTML = data.metrics.map(m => `
+        <div class="svc-metric-card">
+          <div class="num">${m.num}</div>
+          <div class="lbl">${m.lbl}</div>
+        </div>
+      `).join('');
+
+      // Re-create icons if Lucide is loaded
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+
+      // Setup CTA button
+      if (serviceCtaBtn) {
+        serviceCtaBtn.onclick = () => {
+          // Close modal
+          serviceModalClose.click();
+          // Scroll to contact
+          const contactSec = document.getElementById('contact');
+          if (contactSec) {
+            window.scrollTo({
+              top: contactSec.offsetTop - 80,
+              behavior: 'smooth'
+            });
+          }
+          // Select division in form
+          const divSelect = document.getElementById('frm-division');
+          if (divSelect && data.targetOption) {
+            divSelect.value = data.targetOption;
+          }
+          // Focus name input
+          setTimeout(() => {
+            const nameInput = document.getElementById('frm-name');
+            if (nameInput) nameInput.focus();
+          }, 600);
+        };
+      }
+
+      // Open Modal with GSAP
+      serviceModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      gsap.fromTo('#service-modal .modal-content', { scale: 0.85, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(1.2)' });
+    });
+  });
+
+  if (serviceModalClose) {
+    serviceModalClose.addEventListener('click', () => {
+      gsap.to('#service-modal .modal-content', { scale: 0.85, opacity: 0, duration: 0.3, onComplete: () => {
+        serviceModal.classList.remove('active');
+        document.body.style.overflow = '';
+      }});
+    });
+  }
+
+  if (serviceModal) {
+    serviceModal.addEventListener('click', (e) => {
+      if (e.target === serviceModal) serviceModalClose.click();
+    });
+  }
+
+  // ==========================================
+  // Testimonial Verification Audit Modal Engine
+  // ==========================================
+  const testimonialModal = document.getElementById('testimonial-modal');
+  const testimonialModalClose = document.getElementById('testimonial-modal-close');
+  const feedbackCards = document.querySelectorAll('.feedback-log-card');
+
+  feedbackCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const id = card.getAttribute('data-id');
+      const data = testimonialData[id];
+
+      if (!data) return;
+
+      document.getElementById('tst-modal-prompt').textContent = data.prompt;
+      document.getElementById('tst-modal-tag').textContent = data.tag;
+      document.getElementById('tst-modal-quote').textContent = data.quote;
+
+      const avatar = document.getElementById('tst-modal-avatar');
+      avatar.textContent = data.avatar;
+      avatar.style.borderColor = data.color;
+      avatar.style.color = data.color;
+
+      document.getElementById('tst-modal-author').textContent = data.author;
+      document.getElementById('tst-modal-role').textContent = data.role;
+      document.getElementById('tst-modal-details').textContent = data.details;
+
+      const metric = document.getElementById('tst-modal-metric');
+      if (metric) {
+        metric.textContent = data.metric;
+        metric.style.color = data.color;
+      }
+
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+
+      testimonialModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      gsap.fromTo('#testimonial-modal .modal-content', { scale: 0.85, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(1.2)' });
+    });
+  });
+
+  if (testimonialModalClose) {
+    testimonialModalClose.addEventListener('click', () => {
+      gsap.to('#testimonial-modal .modal-content', { scale: 0.85, opacity: 0, duration: 0.3, onComplete: () => {
+        testimonialModal.classList.remove('active');
+        document.body.style.overflow = '';
+      }});
+    });
+  }
+
+  if (testimonialModal) {
+    testimonialModal.addEventListener('click', (e) => {
+      if (e.target === testimonialModal) testimonialModalClose.click();
+    });
+  }
 
   // Testimonials Carousel Controls (if present)
   const carousel = document.querySelector('.testimonials-carousel');
