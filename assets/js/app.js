@@ -258,45 +258,258 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target === modal) modalClose.click();
   });
 
-  // Testimonials Slider
+  // Testimonials Carousel Controls (if present)
   const carousel = document.querySelector('.testimonials-carousel');
   const slides = document.querySelectorAll('.testimonial-slide');
   const prevBtn = document.getElementById('prev-testimonial');
   const nextBtn = document.getElementById('next-testimonial');
   
-  let slideIndex = 0;
-  
-  function updateCarousel() {
-    carousel.style.transform = `translateX(-${slideIndex * 100}%)`;
+  if (carousel && prevBtn && nextBtn) {
+    let slideIndex = 0;
+    
+    function updateCarousel() {
+      carousel.style.transform = `translateX(-${slideIndex * 100}%)`;
+    }
+    
+    nextBtn.addEventListener('click', () => {
+      slideIndex = (slideIndex + 1) % slides.length;
+      updateCarousel();
+    });
+    
+    prevBtn.addEventListener('click', () => {
+      slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+      updateCarousel();
+    });
   }
-  
-  nextBtn.addEventListener('click', () => {
-    slideIndex = (slideIndex + 1) % slides.length;
-    updateCarousel();
-  });
-  
-  prevBtn.addEventListener('click', () => {
-    slideIndex = (slideIndex - 1 + slides.length) % slides.length;
-    updateCarousel();
-  });
 
-  // Interactive Calendar Selection
-  const calDays = document.querySelectorAll('.cal-day:not(.muted)');
-  const timeSlots = document.querySelectorAll('.time-slot');
+  // Dynamic Interactive Calendar Engine (with Past Disabling & 2-Hour Slot Buffer)
+  const calGrid = document.querySelector('.cal-grid');
+  const monthSelect = document.getElementById('cal-month-select');
+  const yearSelect = document.getElementById('cal-year-select');
+  const prevMonthBtn = document.getElementById('cal-prev-month');
+  const nextMonthBtn = document.getElementById('cal-next-month');
   
-  calDays.forEach(day => {
-    day.addEventListener('click', () => {
-      calDays.forEach(d => d.classList.remove('active'));
-      day.classList.add('active');
-    });
-  });
+  const manualTimeInput = document.getElementById('frm-time');
+  const timeChips = document.querySelectorAll('.time-chip');
 
-  timeSlots.forEach(slot => {
-    slot.addEventListener('click', () => {
-      timeSlots.forEach(s => s.classList.remove('active'));
-      slot.classList.add('active');
+  const monthsList = [
+    'January', 'February', 'March', 'April', 'May', 'June', 
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+
+  function parseTimeTo24H(timeStr) {
+    const match = timeStr.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
+    if (!match) return 10;
+    let h = parseInt(match[1], 10);
+    const m = parseInt(match[2], 10);
+    const period = match[3].toUpperCase();
+    if (period === 'PM' && h < 12) h += 12;
+    if (period === 'AM' && h === 12) h = 0;
+    return h + (m / 60);
+  }
+
+  function updateAvailableTimeSlots() {
+    if (!manualTimeInput || !timeChips.length) return;
+
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const currentMonthIndex = now.getMonth();
+    const currentDate = now.getDate();
+    
+    // 2 hours buffer from current real system time
+    const minAvailableHour = now.getHours() + (now.getMinutes() / 60) + 2;
+
+    const selectedMonthName = monthSelect ? monthSelect.value : '';
+    const selectedYear = yearSelect ? parseInt(yearSelect.value, 10) : currentYear;
+    const monthIndex = monthsList.indexOf(selectedMonthName);
+
+    const activeDayElem = calGrid ? calGrid.querySelector('.cal-day.active') : null;
+    const activeDayNum = activeDayElem ? parseInt(activeDayElem.getAttribute('data-day'), 10) : currentDate;
+
+    const isToday = (selectedYear === currentYear && monthIndex === currentMonthIndex && activeDayNum === currentDate);
+
+    let firstValidChipTime = null;
+
+    timeChips.forEach(chip => {
+      const chipTimeStr = chip.getAttribute('data-time');
+      const chipHour = parseTimeTo24H(chipTimeStr);
+
+      if (isToday && chipHour < minAvailableHour) {
+        chip.classList.add('disabled-slot');
+        chip.classList.remove('active');
+      } else {
+        chip.classList.remove('disabled-slot');
+        if (!firstValidChipTime) {
+          firstValidChipTime = chipTimeStr;
+        }
+      }
     });
-  });
+
+    const activeChip = document.querySelector('.time-chip.active:not(.disabled-slot)');
+    if (!activeChip && firstValidChipTime) {
+      timeChips.forEach(c => c.classList.remove('active'));
+      const newActive = Array.from(timeChips).find(c => c.getAttribute('data-time') === firstValidChipTime);
+      if (newActive) {
+        newActive.classList.add('active');
+        manualTimeInput.value = firstValidChipTime;
+      }
+    } else if (activeChip) {
+      manualTimeInput.value = activeChip.getAttribute('data-time');
+    }
+  }
+
+  function renderDynamicCalendar() {
+    if (!calGrid || !monthSelect || !yearSelect) return;
+
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const currentMonthIndex = now.getMonth();
+    const currentDate = now.getDate();
+
+    const selectedMonthName = monthSelect.value;
+    const selectedYear = parseInt(yearSelect.value, 10);
+    const monthIndex = monthsList.indexOf(selectedMonthName);
+
+    if (monthIndex === -1) return;
+
+    const isPastMonth = (selectedYear < currentYear) || (selectedYear === currentYear && monthIndex < currentMonthIndex);
+    const isCurrentMonth = (selectedYear === currentYear && monthIndex === currentMonthIndex);
+
+    // 1st day of the selected month
+    const firstDateObj = new Date(selectedYear, monthIndex, 1);
+    const firstDayIndex = firstDateObj.getDay();
+    const startColumn = (firstDayIndex === 0) ? 6 : firstDayIndex - 1;
+
+    const totalDaysInMonth = new Date(selectedYear, monthIndex + 1, 0).getDate();
+    const prevMonthDays = new Date(selectedYear, monthIndex, 0).getDate();
+
+    // Determine initial active day for this month view
+    let defaultActiveDay = 1;
+    if (isCurrentMonth) {
+      defaultActiveDay = currentDate;
+    }
+
+    let html = `
+      <span class="cal-day-label">M</span>
+      <span class="cal-day-label">T</span>
+      <span class="cal-day-label">W</span>
+      <span class="cal-day-label">T</span>
+      <span class="cal-day-label">F</span>
+      <span class="cal-day-label">S</span>
+      <span class="cal-day-label">S</span>
+    `;
+
+    // 1. Previous month muted days
+    for (let i = startColumn - 1; i >= 0; i--) {
+      const prevDayNum = prevMonthDays - i;
+      html += `<span class="cal-day muted">${prevDayNum}</span>`;
+    }
+
+    // 2. Current month active / past-disabled days (1 to totalDaysInMonth)
+    for (let d = 1; d <= totalDaysInMonth; d++) {
+      let isPastDay = false;
+      if (isPastMonth) {
+        isPastDay = true;
+      } else if (isCurrentMonth && d < currentDate) {
+        isPastDay = true;
+      }
+
+      if (isPastDay) {
+        html += `<span class="cal-day muted past-disabled" title="Past date unavailable">${d}</span>`;
+      } else {
+        const isActive = (d === defaultActiveDay) ? 'active' : '';
+        html += `<span class="cal-day ${isActive}" data-day="${d}">${d}</span>`;
+      }
+    }
+
+    // 3. Next month muted days to complete grid row
+    const totalCells = startColumn + totalDaysInMonth;
+    const remainingCells = (7 - (totalCells % 7)) % 7;
+    for (let n = 1; n <= remainingCells; n++) {
+      html += `<span class="cal-day muted">${n}</span>`;
+    }
+
+    calGrid.innerHTML = html;
+
+    // Re-bind day click listeners
+    const freshCalDays = calGrid.querySelectorAll('.cal-day:not(.muted)');
+    freshCalDays.forEach(day => {
+      day.addEventListener('click', () => {
+        freshCalDays.forEach(d => d.classList.remove('active'));
+        day.classList.add('active');
+        updateAvailableTimeSlots();
+      });
+    });
+
+    updateAvailableTimeSlots();
+  }
+
+  // Initial render on load
+  if (calGrid) {
+    const now = new Date();
+    if (monthSelect) monthSelect.value = monthsList[now.getMonth()];
+    if (yearSelect) yearSelect.value = now.getFullYear().toString();
+
+    renderDynamicCalendar();
+  }
+
+  // Month & Year Select Change Handlers
+  if (monthSelect) {
+    monthSelect.addEventListener('change', renderDynamicCalendar);
+  }
+  if (yearSelect) {
+    yearSelect.addEventListener('change', renderDynamicCalendar);
+  }
+
+  // Navigation Arrows Click Handlers
+  if (prevMonthBtn && monthSelect) {
+    prevMonthBtn.addEventListener('click', () => {
+      let idx = monthsList.indexOf(monthSelect.value);
+      if (idx > 0) {
+        monthSelect.value = monthsList[idx - 1];
+        renderDynamicCalendar();
+      } else if (yearSelect) {
+        let curYear = parseInt(yearSelect.value, 10);
+        const prevYearOption = yearSelect.querySelector(`option[value="${curYear - 1}"]`);
+        if (prevYearOption) {
+          yearSelect.value = (curYear - 1).toString();
+          monthSelect.value = 'December';
+          renderDynamicCalendar();
+        }
+      }
+    });
+  }
+
+  if (nextMonthBtn && monthSelect) {
+    nextMonthBtn.addEventListener('click', () => {
+      let idx = monthsList.indexOf(monthSelect.value);
+      if (idx < monthsList.length - 1) {
+        monthSelect.value = monthsList[idx + 1];
+        renderDynamicCalendar();
+      } else if (yearSelect) {
+        let curYear = parseInt(yearSelect.value, 10);
+        const nextYearOption = yearSelect.querySelector(`option[value="${curYear + 1}"]`);
+        if (nextYearOption) {
+          yearSelect.value = (curYear + 1).toString();
+          monthSelect.value = 'January';
+          renderDynamicCalendar();
+        }
+      }
+    });
+  }
+
+  // Manual Time Input & Chips Suggestion Binding
+  if (timeChips.length && manualTimeInput) {
+    timeChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        if (chip.classList.contains('disabled-slot')) return;
+        timeChips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        const selectedTime = chip.getAttribute('data-time');
+        manualTimeInput.value = selectedTime;
+      });
+    });
+  }
 
   // Scroll Reveal Animations via ScrollTrigger
   if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {

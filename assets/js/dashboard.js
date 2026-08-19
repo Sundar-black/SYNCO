@@ -135,11 +135,13 @@ class AdminDashboard {
     
     // Fetch active slot
     const activeDay = document.querySelector('.cal-day.active');
-    const activeTime = document.querySelector('.time-slot.active');
+    const monthElem = document.getElementById('cal-month-select');
+    const monthVal = monthElem ? monthElem.value.substring(0, 3) : 'Aug';
     const day = activeDay ? activeDay.getAttribute('data-day') : '1';
-    const time = activeTime ? activeTime.getAttribute('data-time') : '10:00 AM';
+    const timeInput = document.getElementById('frm-time');
+    const time = timeInput ? timeInput.value : '10:00 AM';
     
-    const dateStr = `Aug ${day}, ${time}`;
+    const dateStr = `${monthVal} ${day}, ${time}`;
     
     // Add row to Leads Table
     const tr = document.createElement('tr');

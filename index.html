@@ -274,57 +274,104 @@
     </div>
   </section>
 
-  <!-- Testimonials Section -->
+  <!-- Testimonials Section: Command Console Feedback Box -->
   <section id="testimonials" class="testimonial-section">
     <div class="section-container">
-      <div class="section-header" style="text-align: center; margin: 0 auto 60px auto;">
+      <div class="section-header" style="text-align: center; margin: 0 auto 50px auto;">
         <span class="section-subtitle">Client Feedback</span>
         <h2 class="section-title">Vouched By High Growth Founders</h2>
       </div>
 
-      <div class="testimonials-carousel-wrapper">
-        <div class="testimonials-carousel">
-          <!-- Slide 1 -->
-          <div class="testimonial-slide">
-            <div class="testimonial-card glass-panel">
-              <div class="client-avatar-container">
-                <div style="background-color: var(--accent-primary); width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:#030307; font-weight:700;">AM</div>
-              </div>
-              <div class="quote-content">
-                <span class="quote-icon">“</span>
-                <p class="quote-text">SYNCO didn't just rebuild our website; they re-engineered our digital footprint. The transition system between services and the performance speed is unparalleled.</p>
-                <div class="client-info">
+      <div class="feedback-terminal-container glass-panel">
+        <div class="feedback-terminal-header">
+          <div class="terminal-dots">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <div class="terminal-title">
+            <i data-lucide="terminal"></i>
+            <span>SYSTEM_FEEDBACK_LOGS // 4 VERIFIED FOUNDER TRANSCRIPTS</span>
+          </div>
+          <div class="terminal-badge">● LIVE STREAM</div>
+        </div>
+
+        <div class="feedback-logs-grid">
+          <!-- Log Item 1 -->
+          <div class="feedback-log-card">
+            <div class="log-card-header">
+              <span class="log-prompt">&gt; [FEEDBACK_LOG_01]</span>
+              <span class="log-tag">SYNCO IT · WEB DEV</span>
+            </div>
+            <p class="log-quote">"SYNCO didn't just rebuild our website; they re-engineered our digital footprint. The transition system between services and the performance speed is unparalleled."</p>
+            <div class="log-footer">
+              <div class="log-author">
+                <div class="log-avatar" style="border-color: var(--accent-primary); color: var(--accent-primary);">AM</div>
+                <div>
                   <h4>Alexander Mercer</h4>
                   <p>CEO, Aether Labs</p>
                 </div>
               </div>
+              <div class="log-metric-badge">+280% Engagement</div>
             </div>
           </div>
-          <!-- Slide 2 -->
-          <div class="testimonial-slide">
-            <div class="testimonial-card glass-panel">
-              <div class="client-avatar-container">
-                <div style="background-color: var(--accent-secondary); width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700;">SK</div>
-              </div>
-              <div class="quote-content">
-                <span class="quote-icon">“</span>
-                <p class="quote-text">The performance marketing integrations created by their DM team returned a 4.2x ROAS inside of two months. Absolute masters of their craft.</p>
-                <div class="client-info">
+
+          <!-- Log Item 2 -->
+          <div class="feedback-log-card">
+            <div class="log-card-header">
+              <span class="log-prompt">&gt; [FEEDBACK_LOG_02]</span>
+              <span class="log-tag" style="color: #bd00ff; border-color: rgba(189, 0, 255, 0.3);">SYNCO DM · ADS</span>
+            </div>
+            <p class="log-quote">"The performance marketing integrations created by their DM team returned a 4.2x ROAS inside of two months. Absolute masters of their craft."</p>
+            <div class="log-footer">
+              <div class="log-author">
+                <div class="log-avatar" style="border-color: #bd00ff; color: #bd00ff;">SK</div>
+                <div>
                   <h4>Sarah Kincaid</h4>
                   <p>Marketing Director, Nova Corp</p>
                 </div>
               </div>
+              <div class="log-metric-badge" style="color: #bd00ff; border-color: rgba(189, 0, 255, 0.3); background: rgba(189, 0, 255, 0.08);">4.2x ROAS Scaling</div>
             </div>
           </div>
-        </div>
 
-        <div class="carousel-controls">
-          <button class="control-btn" id="prev-testimonial">
-            <i data-lucide="arrow-left"></i>
-          </button>
-          <button class="control-btn" id="next-testimonial">
-            <i data-lucide="arrow-right"></i>
-          </button>
+          <!-- Log Item 3 -->
+          <div class="feedback-log-card">
+            <div class="log-card-header">
+              <span class="log-prompt">&gt; [FEEDBACK_LOG_03]</span>
+              <span class="log-tag">SYNCO IT · MOBILE APP</span>
+            </div>
+            <p class="log-quote">"Architected a native mobile system supporting offline queue sync and localized push syncs sustaining 100% uptime under extreme grid spikes."</p>
+            <div class="log-footer">
+              <div class="log-author">
+                <div class="log-avatar" style="border-color: var(--accent-primary); color: var(--accent-primary);">MV</div>
+                <div>
+                  <h4>Marcus Vance</h4>
+                  <p>CTO, Spectra Logistics</p>
+                </div>
+              </div>
+              <div class="log-metric-badge">100% Uptime Score</div>
+            </div>
+          </div>
+
+          <!-- Log Item 4 -->
+          <div class="feedback-log-card">
+            <div class="log-card-header">
+              <span class="log-prompt">&gt; [FEEDBACK_LOG_04]</span>
+              <span class="log-tag">SYNCO IT · CLOUD ARCH</span>
+            </div>
+            <p class="log-quote">"The high-throughput node configuration and dynamic canvas rendering cut server latency down to &lt;80ms for over 20M+ daily sync requests."</p>
+            <div class="log-footer">
+              <div class="log-author">
+                <div class="log-avatar" style="border-color: var(--accent-primary); color: var(--accent-primary);">ER</div>
+                <div>
+                  <h4>Elena Rostova</h4>
+                  <p>Product Lead, Quantum AI</p>
+                </div>
+              </div>
+              <div class="log-metric-badge">&lt;80ms Server Latency</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -357,9 +404,9 @@
       <div class="contact-grid">
         <!-- Info col -->
         <div class="contact-info-column">
-          <div>
+          <div class="contact-info-header">
             <span class="section-subtitle">Get in Touch</span>
-            <h2 class="section-title" style="margin-bottom: 25px;">Let's Sync Your Ecosystem</h2>
+            <h2 class="section-title" style="margin-bottom: 18px;">Let's Sync Your Ecosystem</h2>
             <p class="section-desc" style="max-width: 480px;">Ready to integrate tech excellence and marketing growth? Book a visual consultation or send a message.</p>
           </div>
           <div class="contact-details">
@@ -373,8 +420,15 @@
             <div class="detail-item">
               <div class="detail-icon"><i data-lucide="map-pin"></i></div>
               <div class="detail-content">
-                <h4>HQ Terminal</h4>
-                <p>Space Cybercity, Suite 101B</p>
+                <h4>Location</h4>
+                <p>Coimbatore</p>
+              </div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-icon"><i data-lucide="clock"></i></div>
+              <div class="detail-content">
+                <h4>Rapid Response</h4>
+                <p>&lt; 2 Hours Guaranteed SLA</p>
               </div>
             </div>
           </div>
@@ -407,10 +461,32 @@
               <label>Select Consultation Slot</label>
               <div class="calendar-widget">
                 <div class="calendar-header">
-                  <div class="cal-month">August 2026</div>
+                  <div class="cal-selectors">
+                    <select id="cal-month-select" class="cal-select">
+                      <option value="January">January</option>
+                      <option value="February">February</option>
+                      <option value="March">March</option>
+                      <option value="April">April</option>
+                      <option value="May">May</option>
+                      <option value="June">June</option>
+                      <option value="July">July</option>
+                      <option value="August" selected>August</option>
+                      <option value="September">September</option>
+                      <option value="October">October</option>
+                      <option value="November">November</option>
+                      <option value="December">December</option>
+                    </select>
+                    <select id="cal-year-select" class="cal-select">
+                      <option value="2026" selected>2026</option>
+                      <option value="2027">2027</option>
+                      <option value="2028">2028</option>
+                      <option value="2029">2029</option>
+                      <option value="2030">2030</option>
+                    </select>
+                  </div>
                   <div class="cal-nav">
-                    <div class="cal-arrow"><i data-lucide="chevron-left"></i></div>
-                    <div class="cal-arrow"><i data-lucide="chevron-right"></i></div>
+                    <div class="cal-arrow" id="cal-prev-month" title="Previous Month"><i data-lucide="chevron-left"></i></div>
+                    <div class="cal-arrow" id="cal-next-month" title="Next Month"><i data-lucide="chevron-right"></i></div>
                   </div>
                 </div>
                 <div class="cal-grid">
@@ -438,10 +514,20 @@
                   <span class="cal-day" data-day="7">7</span>
                   <span class="cal-day" data-day="8">8</span>
                 </div>
-                <div class="time-slots">
-                  <div class="time-slot active" data-time="10:00 AM">10:00 AM</div>
-                  <div class="time-slot" data-time="02:00 PM">02:00 PM</div>
-                  <div class="time-slot" data-time="04:30 PM">04:30 PM</div>
+
+                <!-- Manual Time Selection Section with Suggested Pills -->
+                <div class="manual-time-container">
+                  <div class="manual-time-field">
+                    <label for="frm-time" class="time-label">Preferred Time (Manual):</label>
+                    <input type="text" id="frm-time" class="manual-time-input" value="10:00 AM" placeholder="e.g. 10:30 AM or 03:00 PM">
+                  </div>
+                  <div class="time-suggestions">
+                    <span class="suggest-label">Suggested:</span>
+                    <span class="time-chip active" data-time="10:00 AM">10:00 AM</span>
+                    <span class="time-chip" data-time="02:00 PM">02:00 PM</span>
+                    <span class="time-chip" data-time="04:30 PM">04:30 PM</span>
+                    <span class="time-chip" data-time="06:00 PM">06:00 PM</span>
+                  </div>
                 </div>
               </div>
             </div>
