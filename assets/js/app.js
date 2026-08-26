@@ -207,6 +207,7 @@ const projectData = {
     client: "Aether Labs",
     spec: "Headless Node System",
     date: "Q2 2026",
+    image: "assets/images/portfolio-aether.jpg",
     desc: "We engineered a clean-room modular dashboard displaying multi-tenant analytics. Backed by highly efficient GraphQL APIs and a React framework, it processes heavy datasets under 80ms while rendering live network charts on HTML5 canvases.",
     stat1: "+280%",
     lbl1: "Active Engagement",
@@ -219,6 +220,7 @@ const projectData = {
     client: "Nova Corp",
     spec: "Performance Marketing",
     date: "Q2 2026",
+    image: "assets/images/portfolio-nova.jpg",
     desc: "Nova required organic reach and paid conversions. Our DM team built structured landing environments and target routines on Google & Meta platforms. Using real-time bidding analytics, we scaled ROAS to 4.2x, acquiring over 50k qualified platform signups.",
     stat1: "+340%",
     lbl1: "Acquisition Index",
@@ -231,6 +233,7 @@ const projectData = {
     client: "Spectra Logistics",
     spec: "Native App Development",
     date: "Q1 2026",
+    image: "assets/images/portfolio-spectra.jpg",
     desc: "Spectra coordinates real-time logistics. We architected a swift mobile system using React Native with native bridge expansions. It supports offline queue sync, local secure DB structures, and localized push syncs, sustaining 100% uptime under grid spikes.",
     stat1: "20M",
     lbl1: "Daily Sync Requests",
@@ -438,6 +441,12 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('modal-project-stat-lbl-1').textContent = data.lbl1;
       document.getElementById('modal-project-stat-2').textContent = data.stat2;
       document.getElementById('modal-project-stat-lbl-2').textContent = data.lbl2;
+
+      // Populate Image Showcase
+      const modalImg = document.getElementById('modal-project-img');
+      if (modalImg && data.image) {
+        modalImg.style.backgroundImage = `url('${data.image}')`;
+      }
       
       // Open modal
       modal.classList.add('active');
@@ -911,6 +920,77 @@ document.addEventListener('DOMContentLoaded', () => {
       stagger: 0.15,
       duration: 1.0,
       ease: 'power2.out'
+    });
+  }
+
+  // Contact Form Submission Handler
+  const contactForm = document.getElementById('main-contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const nameInput = document.getElementById('frm-name');
+      const name = nameInput && nameInput.value ? nameInput.value : 'Partner';
+      const divisionInput = document.getElementById('frm-division');
+      const division = divisionInput ? divisionInput.value : 'Full Ecosystem';
+      
+      // Fetch active slot info
+      const activeDay = document.querySelector('.cal-day.active');
+      const monthElem = document.getElementById('cal-month-select');
+      const monthVal = monthElem ? monthElem.value.substring(0, 3) : 'Aug';
+      const day = activeDay ? activeDay.getAttribute('data-day') : '1';
+      const timeInput = document.getElementById('frm-time');
+      const time = timeInput && timeInput.value ? timeInput.value : '10:00 AM';
+      const dateStr = `${monthVal} ${day}, ${time}`;
+      
+      // Reset form
+      contactForm.reset();
+      
+      // Show confirmation toast
+      const alertBox = document.createElement('div');
+      alertBox.className = 'form-success-toast glass-panel';
+      alertBox.style.cssText = `
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: rgba(3, 3, 7, 0.95);
+        border: 1px solid var(--accent-primary);
+        box-shadow: 0 0 30px var(--accent-glow);
+        border-radius: 14px;
+        padding: 20px 24px;
+        color: #fff;
+        z-index: 100000;
+        font-family: var(--font-heading);
+        backdrop-filter: blur(16px);
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      `;
+      alertBox.innerHTML = `
+        <div style="width:36px; height:36px; border-radius:50%; background:rgba(0,240,255,0.12); border:1px solid var(--accent-primary); display:flex; align-items:center; justify-content:center; color:var(--accent-primary); font-size:1.1rem; font-weight:700;">
+          ✓
+        </div>
+        <div>
+          <h4 style="font-size:0.95rem; margin:0 0 4px 0; font-weight:700; color:#fff;">Ecosystem Synced</h4>
+          <p style="font-size:0.82rem; margin:0; color:var(--text-secondary); line-height:1.4;">Thank you, ${name}. Our ${division} team is locked for ${dateStr}.</p>
+        </div>
+      `;
+      
+      document.body.appendChild(alertBox);
+      
+      requestAnimationFrame(() => {
+        alertBox.style.opacity = '1';
+        alertBox.style.transform = 'translateY(0)';
+      });
+      
+      setTimeout(() => {
+        alertBox.style.opacity = '0';
+        alertBox.style.transform = 'translateY(20px)';
+        setTimeout(() => alertBox.remove(), 400);
+      }, 5000);
     });
   }
 });
