@@ -24,13 +24,13 @@
 
 /* Creative/DM Mode override */
 .creative-mode {
-  --bg-color: #05020a;
-  --surface-color: rgba(18, 10, 30, 0.4);
-  --border-color: rgba(255, 255, 255, 0.06);
-  --accent-primary: #bd00ff;
-  --accent-secondary: #ff007f;
-  --accent-glow: rgba(189, 0, 255, 0.4);
-  --accent-rgb: 189, 0, 255;
+  --bg-color: #04030a;
+  --surface-color: rgba(16, 12, 30, 0.45);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --accent-primary: #8b5cf6;
+  --accent-secondary: #6366f1;
+  --accent-glow: rgba(139, 92, 246, 0.45);
+  --accent-rgb: 139, 92, 246;
 }
 
 * {
@@ -394,10 +394,10 @@ header:not(.dash-header).scrolled {
 
 .hero-title .accent-text {
   display: inline;
-  background: linear-gradient(135deg, var(--text-primary), var(--accent-primary));
+  background: linear-gradient(135deg, #ffffff 0%, var(--accent-primary) 65%, var(--accent-secondary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 40px rgba(var(--accent-rgb), 0.1);
+  text-shadow: 0 0 35px rgba(var(--accent-rgb), 0.25);
   transition: background var(--transition-speed) ease;
 }
 

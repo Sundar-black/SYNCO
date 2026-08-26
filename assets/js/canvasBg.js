@@ -17,10 +17,10 @@ class WarpGrid {
         shape: 'square'
       },
       dm: {
-        particleColor: 'rgba(189, 0, 255, 0.45)',
-        lineColor: 'rgba(255, 0, 127, 0.12)',
-        particleCount: 60,
-        speedMultiplier: 0.6,
+        particleColor: 'rgba(139, 92, 246, 0.45)',
+        lineColor: 'rgba(99, 102, 241, 0.15)',
+        particleCount: 65,
+        speedMultiplier: 0.7,
         shape: 'circle'
       }
     };

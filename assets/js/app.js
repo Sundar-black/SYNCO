@@ -171,7 +171,7 @@ const testimonialData = {
     author: "Sarah Kincaid",
     role: "Marketing Director, Nova Corp",
     avatar: "SK",
-    color: "#bd00ff",
+    color: "#8b5cf6",
     metric: "4.2x ROAS Scaling Multiple",
     details: "Nova Corp was struggling with rising acquisition costs across standard ad channels. SYNCO DM constructed a multi-channel Meta & Google acquisition funnel paired with server-side Conversions API tracking. Within 45 days, client cost per acquisition dropped by 38% while ROAS sustained a 4.2x multiple across $150k+ in ad spend."
   },
