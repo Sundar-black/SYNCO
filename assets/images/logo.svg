@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: none; }
+      .logo-path { fill: #ffffff; }
+      .logo-stroke { stroke: #ffffff; stroke-width: 14; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .logo-dot { fill: #ffffff; }
+      .logo-text { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Outfit", "Segoe UI", sans-serif; font-weight: 800; font-size: 72px; fill: #ffffff; letter-spacing: 14px; text-anchor: middle; }
+    </style>
+  </defs>
+  
+  <!-- Outer Hexagonal S Shape -->
+  <g transform="translate(250, 190)">
+    <!-- Top Loop of Hexagon S -->
+    <path class="logo-path" d="M -75 -105 L 45 -105 C 65 -105 80 -92 80 -72 C 80 -52 65 -35 45 -35 L -35 -35 C -55 -35 -70 -20 -70 0 C -70 12 -62 23 -50 30 L 15 30 C 5 -5 -15 -20 -40 -20 L 15 -20 C 45 -20 72 -42 72 -72 C 72 -102 45 -125 15 -125 L -75 -125 Z" opacity="0" />
+    
+    <!-- Geometric Hexagon Lines for S -->
+    <path class="logo-stroke" stroke-width="22" d="M 35 -115 L -45 -115 L -85 -50 L -45 15 L 45 15 L 85 -50" />
+    <path class="logo-stroke" stroke-width="22" d="M -35 115 L 45 115 L 85 50 L 45 -15 L -45 -15 L -85 50" />
+
+    <!-- Center Diagonal Connector with Circuit Nodes -->
+    <line class="logo-stroke" stroke-width="16" x1="-80" y1="50" x2="80" y2="-50" />
+    <circle class="logo-dot" cx="-92" cy="58" r="16" />
+    <circle class="logo-dot" cx="92" cy="-58" r="16" />
+  </g>
+  
+  <!-- Brand Text SYNCO -->
+  <text x="260" y="420" class="logo-text">SYNCO</text>
+</svg>
