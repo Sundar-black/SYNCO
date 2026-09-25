@@ -10,41 +10,10 @@ class WarpGrid {
     this.lineColor = 'rgba(255, 255, 255, 0.05)';
     this.particleCount = 80;
     this.speedMultiplier = 1.0;
-
-    // Theme options
-    this.currentTheme = 'it'; // 'it' or 'dm'
-    this.themes = {
-      it: {
-        particleColor: 'rgba(0, 240, 255, 0.45)',
-        lineColor: 'rgba(0, 82, 255, 0.12)',
-        particleCount: 80,
-        speedMultiplier: 1.0,
-        shape: 'square'
-      },
-      dm: {
-        particleColor: 'rgba(139, 92, 246, 0.45)',
-        lineColor: 'rgba(99, 102, 241, 0.15)',
-        particleCount: 65,
-        speedMultiplier: 0.7,
-        shape: 'circle'
-      }
-    };
     
     this.init();
     this.animate();
     this.bindEvents();
-  }
-
-  setTheme(themeKey) {
-    if (this.themes[themeKey]) {
-      this.currentTheme = themeKey;
-      const t = this.themes[themeKey];
-      this.particleColor = t.particleColor;
-      this.lineColor = t.lineColor;
-      this.particleCount = t.particleCount;
-      this.speedMultiplier = t.speedMultiplier;
-      this.createParticles();
-    }
   }
 
   init() {
