@@ -28,8 +28,7 @@ function initLoader() {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
       
       tl.from('header', { y: -30, opacity: 0, duration: 0.8 }, 0.1)
-        .from('.hero-badge', { y: 20, opacity: 0, duration: 0.6 }, 0.3)
-        .from('.hero-title', { y: 30, opacity: 0, duration: 0.8 }, 0.4)
+        .from('.hero-title', { y: 30, opacity: 0, duration: 0.8 }, 0.3)
         .from('.hero-description', { y: 20, opacity: 0, duration: 0.6 }, 0.6)
         .from('.hero-cta', { y: 20, opacity: 0, duration: 0.6 }, 0.7)
         .from('.hero-metrics', { y: 20, opacity: 0, duration: 0.8 }, 0.8);
