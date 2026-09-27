@@ -243,37 +243,53 @@ document.addEventListener('DOMContentLoaded', () => {
   initCalendarWidget();
 });
 
-// Navigation Highlight & Scroll
+// Navigation Highlight, Smooth Scroll & Mobile Menu Toggle
 function initNavigation() {
   const navItems = document.querySelectorAll('.nav-item');
   const sections = document.querySelectorAll('section');
+  const mobileToggle = document.getElementById('mobile-nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+
+  if (mobileToggle && navLinks) {
+    mobileToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('mobile-open');
+    });
+  }
 
   navItems.forEach(item => {
     item.addEventListener('click', () => {
       const targetId = item.getAttribute('data-target');
       const targetEl = document.getElementById(targetId);
+      if (navLinks) navLinks.classList.remove('mobile-open');
       if (targetEl) {
         targetEl.scrollIntoView({ behavior: 'smooth' });
       }
     });
   });
 
-  window.addEventListener('scroll', () => {
-    let current = '';
+  function updateActiveNav() {
+    let current = 'home';
+    const scrollPosition = window.scrollY + 180;
+
     sections.forEach(section => {
-      const sectionTop = section.offsetTop - 100;
-      if (window.scrollY >= sectionTop) {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
         current = section.getAttribute('id');
       }
     });
 
     navItems.forEach(item => {
-      item.classList.remove('active');
       if (item.getAttribute('data-target') === current) {
         item.classList.add('active');
+      } else {
+        item.classList.remove('active');
       }
     });
-  });
+  }
+
+  window.addEventListener('scroll', updateActiveNav);
+  updateActiveNav();
 }
 
 // Bento Cards Learn More Modal
@@ -420,26 +436,215 @@ function initPortfolioTabs() {
   });
 }
 
-// Calendar Widget & Time Selection
+// Calendar Widget & Dynamic Date/Time Selection Engine
 function initCalendarWidget() {
-  const days = document.querySelectorAll('.cal-day:not(.muted)');
-  const chips = document.querySelectorAll('.time-chip');
+  const monthSelect = document.getElementById('cal-month-select');
+  const yearSelect = document.getElementById('cal-year-select');
+  const prevBtn = document.getElementById('cal-prev-month');
+  const nextBtn = document.getElementById('cal-next-month');
+  const gridEl = document.getElementById('cal-grid');
   const timeInput = document.getElementById('frm-time');
+  const hiddenDateInput = document.getElementById('frm-selected-date');
+  const summaryText = document.getElementById('cal-summary-text');
+  const chips = document.querySelectorAll('.time-chip');
 
-  days.forEach(day => {
-    day.addEventListener('click', () => {
-      days.forEach(d => d.classList.remove('active'));
-      day.classList.add('active');
+  if (!monthSelect || !yearSelect || !gridEl) return;
+
+  const monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+  const shortDayNames = ["M", "T", "W", "T", "F", "S", "S"];
+
+  const realToday = new Date();
+  const currentYear = realToday.getFullYear();
+  const currentMonth = realToday.getMonth(); // 0-indexed
+
+  // State: selected date defaults to today
+  let selectedDate = new Date(realToday.getFullYear(), realToday.getMonth(), realToday.getDate());
+  let selectedTime = timeInput ? timeInput.value.trim() : "10:00 AM";
+
+  // Populate Month select dropdown
+  monthSelect.innerHTML = monthNames.map((m, idx) => 
+    `<option value="${idx}" ${idx === currentMonth ? 'selected' : ''}>${m}</option>`
+  ).join('');
+
+  // Populate Year select dropdown (current year to +3 years)
+  const startYear = currentYear;
+  yearSelect.innerHTML = Array.from({ length: 4 }, (_, i) => startYear + i)
+    .map(y => `<option value="${y}" ${y === currentYear ? 'selected' : ''}>${y}</option>`)
+    .join('');
+
+  // Function to render calendar grid for selected month & year
+  function renderGrid() {
+    gridEl.innerHTML = '';
+
+    // Render day-of-week header labels (M T W T F S S)
+    shortDayNames.forEach(name => {
+      const label = document.createElement('span');
+      label.className = 'cal-day-label';
+      label.textContent = name;
+      gridEl.appendChild(label);
     });
-  });
 
+    const viewYear = parseInt(yearSelect.value, 10);
+    const viewMonth = parseInt(monthSelect.value, 10);
+
+    // Calculate month metrics (ISO week: Monday = 0, Sunday = 6)
+    const firstDayObj = new Date(viewYear, viewMonth, 1);
+    let startDayIndex = firstDayObj.getDay() - 1; // getDay(): 0=Sun, 1=Mon...
+    if (startDayIndex < 0) startDayIndex = 6;
+
+    const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+    const prevMonthDays = new Date(viewYear, viewMonth, 0).getDate();
+
+    // Render previous month trailing days (muted & disabled)
+    for (let i = startDayIndex - 1; i >= 0; i--) {
+      const dayEl = document.createElement('span');
+      dayEl.className = 'cal-day muted past';
+      dayEl.textContent = prevMonthDays - i;
+      gridEl.appendChild(dayEl);
+    }
+
+    // Render current month days
+    const checkToday = new Date(realToday.getFullYear(), realToday.getMonth(), realToday.getDate());
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dayEl = document.createElement('span');
+      const thisDate = new Date(viewYear, viewMonth, day);
+      const checkThis = new Date(viewYear, viewMonth, day);
+
+      const classes = ['cal-day'];
+
+      // Disable past dates in current month/year
+      if (checkThis < checkToday) {
+        classes.push('muted', 'past');
+      } else {
+        if (checkThis.getTime() === checkToday.getTime()) {
+          classes.push('today');
+        }
+        if (selectedDate && checkThis.getTime() === selectedDate.getTime()) {
+          classes.push('active');
+        }
+
+        // Add interactive click handler for valid upcoming dates
+        dayEl.addEventListener('click', () => {
+          selectedDate = thisDate;
+          renderGrid();
+          updateSummary();
+        });
+      }
+
+      dayEl.className = classes.join(' ');
+      dayEl.textContent = day;
+      dayEl.setAttribute('data-day', day);
+      gridEl.appendChild(dayEl);
+    }
+
+    // Render next month leading days to round out grid
+    const totalCells = startDayIndex + daysInMonth;
+    const remainingCells = (7 - (totalCells % 7)) % 7;
+    for (let day = 1; day <= remainingCells; day++) {
+      const dayEl = document.createElement('span');
+      dayEl.className = 'cal-day muted';
+      dayEl.textContent = day;
+      gridEl.appendChild(dayEl);
+    }
+
+    // Disable prev button if already on real current month/year
+    if (prevBtn) {
+      const isAtOrBeforeCurrent = viewYear < realToday.getFullYear() || 
+        (viewYear === realToday.getFullYear() && viewMonth <= realToday.getMonth());
+      prevBtn.style.opacity = isAtOrBeforeCurrent ? '0.3' : '1';
+      prevBtn.style.pointerEvents = isAtOrBeforeCurrent ? 'none' : 'auto';
+    }
+
+    // Trigger Lucide icons re-creation if available
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+  }
+
+  // Update live selection display and hidden input
+  function updateSummary() {
+    if (!selectedDate) return;
+    const options = { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' };
+    const dateStr = selectedDate.toLocaleDateString('en-US', options);
+    
+    if (summaryText) {
+      summaryText.textContent = `Selected: ${dateStr} @ ${selectedTime}`;
+    }
+    if (hiddenDateInput) {
+      const isoFormatted = `${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, '0')}-${String(selectedDate.getDate()).padStart(2, '0')}`;
+      hiddenDateInput.value = `${isoFormatted} ${selectedTime}`;
+    }
+  }
+
+  // Dropdown change events
+  monthSelect.addEventListener('change', renderGrid);
+  yearSelect.addEventListener('change', renderGrid);
+
+  // Month navigation arrows
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      let m = parseInt(monthSelect.value, 10);
+      let y = parseInt(yearSelect.value, 10);
+      if (m > 0) {
+        m--;
+      } else {
+        m = 11;
+        y--;
+      }
+      monthSelect.value = m;
+      yearSelect.value = y;
+      renderGrid();
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      let m = parseInt(monthSelect.value, 10);
+      let y = parseInt(yearSelect.value, 10);
+      if (m < 11) {
+        m++;
+      } else {
+        m = 0;
+        y++;
+      }
+      monthSelect.value = m;
+      yearSelect.value = y;
+      renderGrid();
+    });
+  }
+
+  // Time Chip pill clicks
   chips.forEach(chip => {
-    chip.addEventListener('click', () => {
+    chip.addEventListener('click', (e) => {
+      e.preventDefault();
       chips.forEach(c => c.classList.remove('active'));
       chip.classList.add('active');
+      selectedTime = chip.getAttribute('data-time') || chip.textContent.trim();
       if (timeInput) {
-        timeInput.value = chip.getAttribute('data-time');
+        timeInput.value = selectedTime;
       }
+      updateSummary();
     });
   });
+
+  // Manual time input change
+  if (timeInput) {
+    timeInput.addEventListener('input', (e) => {
+      selectedTime = e.target.value.trim();
+      chips.forEach(c => {
+        if (c.getAttribute('data-time') === selectedTime) {
+          c.classList.add('active');
+        } else {
+          c.classList.remove('active');
+        }
+      });
+      updateSummary();
+    });
+  }
+
+  // Initial render
+  renderGrid();
+  updateSummary();
 }

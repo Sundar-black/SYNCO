@@ -60,13 +60,16 @@
       </a>
       <nav class="nav-links">
         <div class="nav-item active" data-target="home">Overview</div>
-        <div class="nav-item" data-target="services">Services</div>
         <div class="nav-item" data-target="about">About</div>
+        <div class="nav-item" data-target="services">Services</div>
         <div class="nav-item" data-target="testimonials">Reviews</div>
         <div class="nav-item" data-target="contact">Contact</div>
       </nav>
       <div class="nav-actions">
         <button class="btn btn-primary nav-booking-btn" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Get Started</button>
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle Navigation">
+          <i data-lucide="menu"></i>
+        </button>
       </div>
     </div>
   </header>
@@ -90,29 +93,6 @@
           Book Consultation
         </button>
       </div>
-
-      <!-- Hero Metrics Bar -->
-      <div class="hero-metrics">
-        <div class="metric-item">
-          <span class="metric-value">&lt; 80ms</span>
-          <span class="metric-label">Global Latency</span>
-        </div>
-        <div class="metric-divider"></div>
-        <div class="metric-item">
-          <span class="metric-value">99.99%</span>
-          <span class="metric-label">Uptime SLA</span>
-        </div>
-        <div class="metric-divider"></div>
-        <div class="metric-item">
-          <span class="metric-value">4.2x</span>
-          <span class="metric-label">Average ROAS</span>
-        </div>
-        <div class="metric-divider"></div>
-        <div class="metric-item">
-          <span class="metric-value">20M+</span>
-          <span class="metric-label">Daily Syncs</span>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -122,22 +102,22 @@
       <div class="about-grid">
         <div class="about-header-col">
           <span class="section-subtitle">About SYNCO</span>
-          <h2 class="section-title">Engineered Standards.<br><span class="metallic-text">Uncompromised Quality.</span></h2>
+          <h2 class="section-title">Engineered Standards. <br><span class="metallic-text">Uncompromised Quality.</span></h2>
           <p class="about-lead">
             SYNCO is a premier digital ecosystem engineering firm. We combine high-speed software architecture, cinematic media production, visual graphic systems, and programmatic growth marketing under one execution standard.
           </p>
           <div class="about-stats-row">
-            <div class="about-stat">
+            <div class="about-stat-card">
               <span class="stat-number">100%</span>
-              <span class="stat-text">Execution Rigor</span>
+              <span class="stat-text">Digital Commitment</span>
             </div>
-            <div class="about-stat">
+            <div class="about-stat-card">
               <span class="stat-number">&lt; 80ms</span>
-              <span class="stat-text">Edge Latency</span>
+              <span class="stat-text">Optimized Performance</span>
             </div>
-            <div class="about-stat">
-              <span class="stat-number">4.2x</span>
-              <span class="stat-text">Average ROAS</span>
+            <div class="about-stat-card">
+              <span class="stat-number">24/7</span>
+              <span class="stat-text">Business Support</span>
             </div>
           </div>
         </div>
@@ -497,65 +477,46 @@
               <div class="calendar-widget">
                 <div class="calendar-header">
                   <div class="cal-selectors">
-                    <select id="cal-month-select" class="cal-select">
-                      <option value="January">January</option>
-                      <option value="February">February</option>
-                      <option value="March">March</option>
-                      <option value="April">April</option>
-                      <option value="May">May</option>
-                      <option value="June">June</option>
-                      <option value="July">July</option>
-                      <option value="August" selected>August</option>
-                      <option value="September">September</option>
-                      <option value="October">October</option>
-                      <option value="November">November</option>
-                      <option value="December">December</option>
+                    <select id="cal-month-select" class="cal-select" aria-label="Select Month">
+                      <!-- Populated dynamically by JS -->
                     </select>
-                    <select id="cal-year-select" class="cal-select">
-                      <option value="2026" selected>2026</option>
-                      <option value="2027">2027</option>
+                    <select id="cal-year-select" class="cal-select" aria-label="Select Year">
+                      <!-- Populated dynamically by JS -->
                     </select>
                   </div>
                   <div class="cal-nav">
-                    <div class="cal-arrow" id="cal-prev-month"><i data-lucide="chevron-left"></i></div>
-                    <div class="cal-arrow" id="cal-next-month"><i data-lucide="chevron-right"></i></div>
+                    <button type="button" class="cal-arrow" id="cal-prev-month" aria-label="Previous Month"><i data-lucide="chevron-left"></i></button>
+                    <button type="button" class="cal-arrow" id="cal-next-month" aria-label="Next Month"><i data-lucide="chevron-right"></i></button>
                   </div>
                 </div>
 
-                <div class="cal-grid">
-                  <span class="cal-day-label">M</span>
-                  <span class="cal-day-label">T</span>
-                  <span class="cal-day-label">W</span>
-                  <span class="cal-day-label">T</span>
-                  <span class="cal-day-label">F</span>
-                  <span class="cal-day-label">S</span>
-                  <span class="cal-day-label">S</span>
-                  
-                  <span class="cal-day muted">27</span>
-                  <span class="cal-day muted">28</span>
-                  <span class="cal-day muted">29</span>
-                  <span class="cal-day muted">30</span>
-                  <span class="cal-day muted">31</span>
-                  <span class="cal-day active" data-day="1">1</span>
-                  <span class="cal-day" data-day="2">2</span>
-                  <span class="cal-day" data-day="3">3</span>
-                  <span class="cal-day" data-day="4">4</span>
-                  <span class="cal-day" data-day="5">5</span>
-                  <span class="cal-day" data-day="6">6</span>
-                  <span class="cal-day" data-day="7">7</span>
+                <div class="cal-grid" id="cal-grid">
+                  <!-- Dynamic calendar days grid -->
                 </div>
 
                 <div class="manual-time-container">
-                  <div class="manual-time-field">
-                    <label for="frm-time" class="time-label">Preferred Time:</label>
-                    <input type="text" id="frm-time" class="manual-time-input" value="10:00 AM">
+                  <div class="time-header-row">
+                    <span class="time-label"><i data-lucide="clock" class="time-icon"></i> Preferred Time:</span>
+                    <div class="manual-time-field">
+                      <input type="text" id="frm-time" class="manual-time-input" value="10:00 AM" placeholder="10:00 AM">
+                    </div>
                   </div>
                   <div class="time-suggestions">
-                    <span class="time-chip active" data-time="10:00 AM">10:00 AM</span>
-                    <span class="time-chip" data-time="02:00 PM">02:00 PM</span>
-                    <span class="time-chip" data-time="04:30 PM">04:30 PM</span>
+                    <button type="button" class="time-chip" data-time="09:00 AM">09:00 AM</button>
+                    <button type="button" class="time-chip active" data-time="10:00 AM">10:00 AM</button>
+                    <button type="button" class="time-chip" data-time="11:30 AM">11:30 AM</button>
+                    <button type="button" class="time-chip" data-time="02:00 PM">02:00 PM</button>
+                    <button type="button" class="time-chip" data-time="04:30 PM">04:30 PM</button>
                   </div>
                 </div>
+
+                <!-- Live Selection Summary Badge -->
+                <div class="cal-summary" id="cal-summary">
+                  <i data-lucide="calendar" class="summary-icon"></i>
+                  <span id="cal-summary-text">Selected: Saturday, Sep 26, 2026 @ 10:00 AM</span>
+                </div>
+                
+                <input type="hidden" id="frm-selected-date" name="selected_date" value="">
               </div>
             </div>
 
@@ -614,9 +575,15 @@
       <div class="footer-bottom">
         <p>&copy; 2026 SYNCO Ecosystem. Engineered Perfection. All Rights Reserved.</p>
         <div class="footer-socials">
-          <a class="social-icon" href="#"><i data-lucide="twitter"></i></a>
-          <a class="social-icon" href="#"><i data-lucide="linkedin"></i></a>
-          <a class="social-icon" href="#"><i data-lucide="github"></i></a>
+          <a class="social-icon" href="#" aria-label="X / Twitter">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
+          </a>
+          <a class="social-icon" href="#" aria-label="LinkedIn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a class="social-icon" href="#" aria-label="GitHub">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+          </a>
         </div>
       </div>
     </div>
