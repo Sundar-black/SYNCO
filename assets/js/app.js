@@ -648,3 +648,222 @@ function initCalendarWidget() {
   renderGrid();
   updateSummary();
 }
+
+// ======================================================
+// SYNCO — BMW M5 HIGH-RES IMAGE CINEMATIC SCROLL ANIMATION
+// ======================================================
+
+function initSyncoScrollCar() {
+  const canvas = document.getElementById("synco-car-canvas");
+
+  if (!canvas || typeof THREE === "undefined") {
+    console.warn("Three.js or canvas not found");
+    return;
+  }
+
+  // ----------------------------------------------------
+  // SCENE & CAMERA
+  // ----------------------------------------------------
+
+  const scene = new THREE.Scene();
+
+  const camera = new THREE.PerspectiveCamera(
+    40,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    100
+  );
+  camera.position.set(0, 0.2, 6.5);
+
+  // ----------------------------------------------------
+  // RENDERER
+  // ----------------------------------------------------
+
+  const renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    alpha: true,
+    antialias: true
+  });
+
+  renderer.setPixelRatio(
+    Math.min(window.devicePixelRatio, 2)
+  );
+
+  renderer.setSize(
+    window.innerWidth,
+    window.innerHeight
+  );
+
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+  // ----------------------------------------------------
+  // LIGHTING
+  // ----------------------------------------------------
+
+  const ambient = new THREE.AmbientLight(0xffffff, 1.5);
+  scene.add(ambient);
+
+  const frontSpotLeft = new THREE.PointLight(0x00bfff, 0, 15);
+  frontSpotLeft.position.set(-1.2, 0.2, 2);
+  scene.add(frontSpotLeft);
+
+  const frontSpotRight = new THREE.PointLight(0x00bfff, 0, 15);
+  frontSpotRight.position.set(1.2, 0.2, 2);
+  scene.add(frontSpotRight);
+
+  // ----------------------------------------------------
+  // CAR GROUP & BMW M5 IMAGE TEXTURE
+  // ----------------------------------------------------
+
+  const carGroup = new THREE.Group();
+  scene.add(carGroup);
+
+  const textureLoader = new THREE.TextureLoader();
+  textureLoader.load(
+    './assets/images/bmw_m5.png',
+    (texture) => {
+      texture.colorSpace = THREE.SRGBColorSpace;
+
+      const imageAspect = texture.image.width / texture.image.height;
+      const planeHeight = 4.0;
+      const planeWidth = planeHeight * imageAspect;
+
+      const geometry = new THREE.PlaneGeometry(planeWidth, planeHeight);
+      const material = new THREE.MeshBasicMaterial({
+        map: texture,
+        transparent: true,
+        side: THREE.DoubleSide,
+        depthWrite: false
+      });
+
+      const carMesh = new THREE.Mesh(geometry, material);
+      carMesh.position.set(0, -0.1, 0);
+      carGroup.add(carMesh);
+
+      // ----------------------------------------------------
+      // GLOWING LED HEADLIGHT OVERLAYS (Angel Eye Effect)
+      // ----------------------------------------------------
+
+      const canvasGlow = document.createElement('canvas');
+      canvasGlow.width = 128;
+      canvasGlow.height = 128;
+      const ctx = canvasGlow.getContext('2d');
+      const grad = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
+      grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
+      grad.addColorStop(0.3, 'rgba(0, 190, 255, 0.85)');
+      grad.addColorStop(0.7, 'rgba(0, 120, 255, 0.25)');
+      grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 128, 128);
+
+      const glowTex = new THREE.CanvasTexture(canvasGlow);
+      const glowMat = new THREE.MeshBasicMaterial({
+        map: glowTex,
+        transparent: true,
+        blending: THREE.AdditiveBlending,
+        opacity: 0,
+        depthWrite: false
+      });
+
+      const glowGeo = new THREE.PlaneGeometry(0.85, 0.45);
+
+      const headlightGlowLeft = new THREE.Mesh(glowGeo, glowMat);
+      headlightGlowLeft.position.set(-0.75, -0.12, 0.05);
+      carGroup.add(headlightGlowLeft);
+
+      const headlightGlowRight = new THREE.Mesh(glowGeo, glowMat);
+      headlightGlowRight.position.set(0.75, -0.12, 0.05);
+      carGroup.add(headlightGlowRight);
+
+      carGroup.userData = {
+        glowMat,
+        frontSpotLeft,
+        frontSpotRight
+      };
+
+      updateAnimation();
+    },
+    undefined,
+    (err) => {
+      console.warn("Could not load BMW M5 texture:", err);
+    }
+  );
+
+  // ----------------------------------------------------
+  // HELPER FUNCTIONS
+  // ----------------------------------------------------
+
+  function clamp(val, min, max) {
+    return Math.max(min, Math.min(max, val));
+  }
+
+  function range(progress, start, end) {
+    return clamp((progress - start) / (end - start), 0, 1);
+  }
+
+  // ----------------------------------------------------
+  // SCROLL ANIMATION LOGIC
+  // ----------------------------------------------------
+
+  function updateAnimation() {
+    const scrollTop = window.scrollY;
+    const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = documentHeight > 0 ? scrollTop / documentHeight : 0;
+
+    // 0% → 25%: Car appearance, 3D tilt rotation & subtle sway
+    const rotateProg = range(progress, 0.0, 0.25);
+    carGroup.rotation.y = THREE.MathUtils.lerp(-0.16, 0.16, rotateProg);
+    carGroup.rotation.z = Math.sin(rotateProg * Math.PI) * 0.03;
+    carGroup.position.x = Math.sin(rotateProg * Math.PI) * 0.35;
+    carGroup.position.y = THREE.MathUtils.lerp(-0.3, 0.0, rotateProg);
+
+    // 25% → 60%: Parallax zoom & pitch angle
+    const midProg = range(progress, 0.25, 0.60);
+    carGroup.rotation.x = Math.sin(midProg * Math.PI) * -0.05;
+    carGroup.scale.setScalar(THREE.MathUtils.lerp(1.0, 1.15, midProg));
+
+    // 60% → 80%: Angel Eye LED Headlights ignition
+    const lightProg = range(progress, 0.60, 0.80);
+    const smoothLight = lightProg * lightProg;
+
+    if (carGroup.userData.glowMat) {
+      carGroup.userData.glowMat.opacity = smoothLight * 0.95;
+      carGroup.userData.frontSpotLeft.intensity = smoothLight * 14;
+      carGroup.userData.frontSpotRight.intensity = smoothLight * 14;
+    }
+
+    // 80% → 100%: Forward zoom acceleration towards camera
+    const forwardProg = range(progress, 0.80, 1.0);
+    carGroup.position.z = THREE.MathUtils.lerp(0, 2.5, forwardProg);
+    carGroup.position.y = THREE.MathUtils.lerp(0.0, -0.5, forwardProg);
+    carGroup.scale.setScalar(THREE.MathUtils.lerp(1.15, 1.55, forwardProg));
+  }
+
+  // ----------------------------------------------------
+  // LISTENERS & RENDER LOOP
+  // ----------------------------------------------------
+
+  window.addEventListener("scroll", updateAnimation, { passive: true });
+
+  window.addEventListener("resize", () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  function render() {
+    requestAnimationFrame(render);
+    renderer.render(scene, camera);
+  }
+
+  render();
+}
+
+// START
+document.addEventListener("DOMContentLoaded", () => {
+  initSyncoScrollCar();
+});
+
+
+
+
