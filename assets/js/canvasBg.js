@@ -30,7 +30,7 @@ class SYNCOAutomotiveEngine {
   initThree() {
     this.scene = new THREE.Scene();
     this.scene.background = null;
-    this.scene.fog = new THREE.FogExp2(0xf2f4f8, 0.018);
+    this.scene.fog = new THREE.FogExp2(0xffffff, 0.018);
 
     this.camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 100);
     this.camera.position.set(0, 1.2, 7.5);

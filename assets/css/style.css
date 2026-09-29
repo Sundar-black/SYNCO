@@ -2,7 +2,7 @@
 
 :root {
   /* Clean Light Studio Palette */
-  --bg-color: #f2f4f8;
+  --bg-color: #ffffff;
   --surface-color: rgba(255, 255, 255, 0.84);
   --surface-hover: rgba(255, 255, 255, 0.95);
   --border-color: rgba(0, 0, 0, 0.12);
@@ -33,7 +33,7 @@ html {
 }
 
 body {
-  background-color: var(--bg-color);
+  background-color: #ffffff !important;
   color: var(--text-primary);
   font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
@@ -73,7 +73,7 @@ a {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #f2f4f8;
+  background-color: #ffffff;
   z-index: 9999;
   display: flex;
   flex-direction: column;
@@ -131,44 +131,6 @@ a {
   font-weight: 700;
 }
 
-/* Background Canvas & BMW M5 Image */
-#canvas-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
-  pointer-events: none;
-  overflow: hidden;
-  background-color: var(--bg-color);
-}
-
-#car-bg-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('../images/bmw_m5.png');
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  opacity: 0.28;
-  filter: contrast(1.15) brightness(0.95);
-  mix-blend-mode: multiply;
-  transition: transform 0.1s ease-out;
-  z-index: 0;
-}
-
-#canvas-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
 
 /* Header Navigation */
 header {
@@ -1987,37 +1949,4 @@ section {
   }
 }
 
-/* SYNCO Cinematic Car Background */
-#synco-car-bg {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
-  background: transparent;
-}
-
-#synco-car-canvas {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-/* Keep all website content above the car */
-header,
-main,
-section,
-footer,
-nav,
-.modal,
-#app {
-  position: relative;
-  z-index: 2;
-}
-
-@media (max-width: 768px) {
-  #synco-car-bg {
-    opacity: 0.55;
-  }
-}
 
